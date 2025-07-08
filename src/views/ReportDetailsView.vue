@@ -110,7 +110,7 @@ const report = computed(() => {
 
 // Check if current user owns this report
 const isOwner = computed(() => {
-  return currentUser.value && report.value && currentUser.value.id === report.value.resident_id
+  return !!(currentUser.value && report.value && currentUser.value.id === report.value.resident_id)
 })
 
 const goBack = () => {
