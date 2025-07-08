@@ -1,24 +1,36 @@
 <template>
-  <footer class="bg-gradient-to-br from-background to-surface border-t border-border/50 py-16">
+  <footer class="bg-[#534666] border-t border-white/10 py-16">
     <div class="container mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div class="col-span-1 md:col-span-2">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
+        <div class="md:col-span-2">
           <div class="flex items-center space-x-3 mb-6">
-            <div
-              class="claycard w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center"
-            >
-              <span class="text-white font-bold text-lg">FA</span>
+            <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center">
+              <span class="text-[#534666] font-bold text-lg">FA</span>
             </div>
-            <span class="font-bold text-2xl text-text-primary">FixNet</span>
+            <span class="font-bold text-2xl text-white">FixMyArea</span>
           </div>
-          <p class="text-text-secondary mb-6 max-w-md leading-relaxed">
+          <p class="text-white/70 mb-6 max-w-md leading-relaxed">
             Empowering communities to create positive change through transparent, efficient
             reporting of local infrastructure issues.
           </p>
           <div class="flex space-x-4">
+            <!-- GitHub -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.397.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.852 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+            <!-- Twitter -->
+            <a
+              href="#"
+              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -26,19 +38,10 @@
                 />
               </svg>
             </a>
+            <!-- LinkedIn -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-secondary/10 hover:bg-secondary/20 text-secondary rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                />
-              </svg>
-            </a>
-            <a
-              href="#"
-              class="claybutton w-10 h-10 bg-accent/10 hover:bg-accent/20 text-accent rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -46,16 +49,27 @@
                 />
               </svg>
             </a>
+            <!-- Telegram -->
+            <a
+              href="#"
+              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M11.944 0C5.356 0 0 5.356 0 11.944s5.356 11.944 11.944 11.944 11.944-5.356 11.944-11.944S18.532 0 11.944 0zm5.922 8.24l-1.944 9.056c-.222.944-.833 1.167-1.611.722l-4.5-3.333-2.167 2.056c-.222.222-.444.444-.889.444l.333-4.556L4.167 9.82C3.333 9.546 3.333 8.82 4.389 8.546l11.333-4.389c.833-.333 1.611.167 1.333.983z"
+                />
+              </svg>
+            </a>
           </div>
         </div>
 
         <div>
-          <h3 class="font-semibold text-lg mb-6 text-text-primary">Platform</h3>
+          <h3 class="font-semibold text-lg mb-6 text-white">Platform</h3>
           <ul class="space-y-3">
             <li>
               <router-link
                 to="/dashboard"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -67,7 +81,7 @@
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                   />
                 </svg>
                 Dashboard
@@ -76,7 +90,7 @@
             <li>
               <router-link
                 to="/report"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -93,7 +107,7 @@
             <li>
               <router-link
                 to="/agency"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -115,12 +129,12 @@
         </div>
 
         <div>
-          <h3 class="font-semibold text-lg mb-6 text-text-primary">Resources</h3>
+          <h3 class="font-semibold text-lg mb-6 text-white">Resources</h3>
           <ul class="space-y-3">
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -141,7 +155,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -162,7 +176,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -180,37 +194,16 @@
                 User Guide
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
-              >
-                <svg
-                  class="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                How It Works
-              </a>
-            </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="font-semibold text-lg mb-6 text-text-primary">Legal</h3>
+          <h3 class="font-semibold text-lg mb-6 text-white">Legal</h3>
           <ul class="space-y-3">
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -231,7 +224,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -252,7 +245,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
+                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
               >
                 <svg
                   class="w-4 h-4"
@@ -270,79 +263,32 @@
                 Accessibility
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                class="claybutton text-text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
-              >
-                <svg
-                  class="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"
-                  />
-                </svg>
-                Cookie Policy
-              </a>
-            </li>
           </ul>
-        </div>
-      </div>
-
-      <!-- Newsletter Section -->
-      <div class="mt-16 pt-12 border-t border-border/50">
-        <div
-          class="claycard bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl p-8 text-center"
-        >
-          <h3 class="text-2xl font-bold text-text-primary mb-4">Stay Updated</h3>
-          <p class="text-text-secondary mb-6 max-w-md mx-auto">
-            Get the latest news about community improvements and platform updates.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <div class="flex-1">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="clayinput w-full px-4 py-3 text-text-primary placeholder-text-text-muted rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
-            <button
-              class="claybutton bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl font-medium hover:scale-105 transition-all duration-200"
-            >
-              Subscribe
-            </button>
-          </div>
         </div>
       </div>
 
       <!-- Bottom Section -->
       <div
-        class="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4"
+        class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
       >
-        <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-text-muted">
-          <p>&copy; 2025 FixNet. All rights reserved.</p>
+        <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-white/50">
+          <p>&copy; 2025 FixMyArea. All rights reserved.</p>
           <div class="flex items-center gap-2">
             <span>Built with</span>
-            <svg class="w-4 h-4 text-error" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                 clip-rule="evenodd"
               />
             </svg>
-            <span>for stronger communities</span>
+            <span>by {{ currentUserLogin }} for stronger communities</span>
           </div>
         </div>
 
-        <div class="flex items-center gap-4 text-sm text-text-muted">
+        <div class="flex items-center gap-4 text-sm text-white/50">
           <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span>All systems operational</span>
           </div>
         </div>
@@ -352,7 +298,9 @@
 </template>
 
 <script setup lang="ts">
-// No script logic needed for this component
+import { ref } from 'vue'
+
+const currentUserLogin = ref('venopyX')
 </script>
 
 <style scoped>
