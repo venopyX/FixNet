@@ -79,7 +79,7 @@ interface ReportFormData {
   photo?: File
 }
 
-defineEmits<{
+const emit = defineEmits<{
   submit: [data: ReportFormData]
   cancel: []
 }>()
