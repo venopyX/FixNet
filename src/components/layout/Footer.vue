@@ -1,11 +1,13 @@
 <template>
-  <footer class="bg-[#534666] border-t border-white/10 py-16">
+  <footer class="bg-black border-t border-white/10 py-16">
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
         <div class="md:col-span-2">
           <div class="flex items-center space-x-3 mb-6">
-            <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center">
-              <span class="text-[#534666] font-bold text-lg">FA</span>
+            <div
+              class="claycard w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center"
+            >
+              <span class="text-white font-bold text-lg">FA</span>
             </div>
             <span class="font-bold text-2xl text-white">FixMyArea</span>
           </div>
@@ -17,7 +19,7 @@
             <!-- GitHub -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -30,7 +32,7 @@
             <!-- Twitter -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-secondary/10 hover:bg-secondary/20 text-secondary rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -41,7 +43,7 @@
             <!-- LinkedIn -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-accent/10 hover:bg-accent/20 text-accent rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -52,7 +54,7 @@
             <!-- Telegram -->
             <a
               href="#"
-              class="claybutton w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              class="claybutton w-10 h-10 bg-info/10 hover:bg-info/20 text-info rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -69,7 +71,7 @@
             <li>
               <router-link
                 to="/dashboard"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -90,7 +92,7 @@
             <li>
               <router-link
                 to="/report"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -107,7 +109,7 @@
             <li>
               <router-link
                 to="/agency"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -134,7 +136,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -155,7 +157,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -176,7 +178,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -203,7 +205,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -224,7 +226,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -245,7 +247,7 @@
             <li>
               <a
                 href="#"
-                class="claybutton text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-white/10"
+                class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg
                   class="w-4 h-4"
@@ -275,7 +277,7 @@
           <p>&copy; 2025 FixMyArea. All rights reserved.</p>
           <div class="flex items-center gap-2">
             <span>Built with</span>
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-error" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
@@ -288,7 +290,7 @@
 
         <div class="flex items-center gap-4 text-sm text-white/50">
           <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-success rounded-full animate-pulse"></div>
             <span>All systems operational</span>
           </div>
         </div>
@@ -300,7 +302,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const currentUserLogin = ref('venopyX')
+const currentUserLogin = ref('@venopyx')
 </script>
 
 <style scoped>
