@@ -12,13 +12,13 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/DashboardView.vue'),
-    meta: { requiresAuth: true, role: 'resident' }
+    meta: { requiresAuth: true, role: 'resident' },
   },
   {
     path: '/admin',
     name: 'Admin',
     component: () => import('@/views/AdminDashboardView.vue'),
-    meta: { requiresAuth: true, role: 'admin' }
+    meta: { requiresAuth: true, role: 'admin' },
   },
   {
     path: '/agency',
@@ -29,13 +29,13 @@ const routes = [
     path: '/report',
     name: 'Report',
     component: () => import('@/views/ReportView.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
   {
     path: '/report/:id',
     name: 'ReportDetails',
     component: () => import('@/views/ReportDetailsView.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/auth',
