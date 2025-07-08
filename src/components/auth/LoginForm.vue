@@ -59,7 +59,7 @@
           :class="{ 'opacity-50 cursor-not-allowed': isLoading }"
         >
           <span v-if="isLoading">Signing In...</span>
-          <span v-else">Sign In</span>
+          <span v-else>Sign In</span>
         </button>
       </form>
 
@@ -98,12 +98,12 @@ const router = useRouter()
 
 const form = reactive({
   email: '',
-  password: ''
+  password: '',
 })
 
 const errors = reactive({
   email: '',
-  password: ''
+  password: '',
 })
 
 const isLoading = ref(false)
@@ -140,10 +140,10 @@ const handleLogin = async () => {
   }
 
   isLoading.value = true
-  
+
   try {
     const result = await authService.login(form.email, form.password)
-    
+
     if (result.success && result.user) {
       // Redirect based on user role
       if (result.user.role === 'admin') {
