@@ -21,11 +21,6 @@ const routes = [
     meta: { requiresAuth: true, role: 'admin' },
   },
   {
-    path: '/agency',
-    name: 'Agency',
-    component: () => import('@/views/AgencyView.vue'),
-  },
-  {
     path: '/report',
     name: 'Report',
     component: () => import('@/views/ReportView.vue'),
