@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+:root {
+  /* Primary Brand Colors */
+  --primary: #ff6b6b;        /* Coral sunset */
+  --secondary: #ffa726;      /* Golden hour */
+  --accent: #ab47bc;         /* Twilight purple */
+  
+  /* Status Colors */
+  --success: #66bb6a;        /* Forest green */
+  --warning: #ffca28;        /* Amber glow */
+  --error: #ef5350;          /* Warm red */
+  --info: #42a5f5;           /* Evening blue */
+  
+  /* Neutral Tones */
+  --background: #fff8f0;     /* Cream sky */
+  --surface: #ffffff;        /* Cloud white */
+  --muted: #faf0e6;          /* Soft peach */
+  --border: #ffe0cc;         /* Sunset border */
+  
+  /* Text Colors */
+  --text-primary: #3e2723;   /* Dark brown */
+  --text-secondary: #5d4037; /* Medium brown */
+  --text-muted: #8d6e63;     /* Light brown */
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Claymorphism utilities */
+@utility claycard {
+  background: var(--surface);
+  border-radius: 1.5rem;
+  box-shadow: 
+    20px 20px 60px rgba(163, 177, 198, 0.15),
+    -20px -20px 60px rgba(255, 255, 255, 0.7),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@utility claybutton {
+  border-radius: 1rem;
+  box-shadow: 
+    8px 8px 16px rgba(163, 177, 198, 0.2),
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+}
+
+@utility clayinput {
+  background: var(--surface);
+  border-radius: 0.75rem;
+  box-shadow: 
+    inset 4px 4px 8px rgba(163, 177, 198, 0.1),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+/* Hover and focus variants */
+.claybutton {
+  @variant hover {
+    box-shadow: 
+      4px 4px 8px rgba(163, 177, 198, 0.3),
+      -4px -4px 8px rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px);
+  }
+  
+  @variant active {
+    box-shadow: 
+      inset 4px 4px 8px rgba(163, 177, 198, 0.2),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+    transform: translateY(0px);
+  }
+}
+
+.clayinput {
+  @variant focus {
+    outline: none;
+    box-shadow: 
+      inset 6px 6px 12px rgba(163, 177, 198, 0.15),
+      inset -6px -6px 12px rgba(255, 255, 255, 0.6),
+      0 0 0 3px rgba(99, 102, 241, 0.1);
+    border-color: var(--primary);
+  }
+}
