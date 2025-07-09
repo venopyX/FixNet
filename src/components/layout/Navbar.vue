@@ -19,7 +19,7 @@
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-2">
           <a
-            href="#how-it-works"
+            href="/#how-it-works"
             class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             <svg
@@ -38,7 +38,7 @@
             How It Works
           </a>
           <a
-            href="#features"
+            href="/#features"
             class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             <svg
@@ -181,7 +181,7 @@
             <!-- Navigation Links -->
             <div class="space-y-2 mb-4">
               <a
-                href="#how-it-works"
+                href="/#how-it-works"
                 class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
@@ -201,7 +201,7 @@
                 <span class="font-medium">How It Works</span>
               </a>
               <a
-                href="#features"
+                href="/#features"
                 class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
