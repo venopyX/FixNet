@@ -54,17 +54,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Special handling for `root(/)` route and routes that need forced scroll
-    if (to.meta?.forceScrollTop || to.path === '/') {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          // Force immediate scroll for problematic routes
-          document.documentElement.scrollTop = 0
-          document.body.scrollTop = 0
-          resolve({ top: 0, left: 0, behavior: 'auto' })
-        }, 0)
-      })
-    }
+    // Special handling for routes that need forced scroll
+    // if (to.meta?.forceScrollTop || to.path === '/auth') {
+    //   return new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       // Force immediate scroll for problematic routes
+    //       document.documentElement.scrollTop = 0
+    //       document.body.scrollTop = 0
+    //       resolve({ top: 0, left: 0, behavior: 'auto' })
+    //     }, 0)
+    //   })
+    // }
 
     // If there's a saved position (browser back/forward), use it
     if (savedPosition) {
