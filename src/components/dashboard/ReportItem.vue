@@ -88,6 +88,7 @@
       <!-- Photo Preview -->
       <div v-if="report.photo_url" class="lg:w-24 lg:h-24 w-full h-32">
         <div
+          v-if="!imageLoaded"
           class="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center"
         >
           <svg
@@ -109,6 +110,15 @@
             />
           </svg>
         </div>
+        <img
+          v-if="report.photo_url"
+          v-show="imageLoaded"
+          :src="report.photo_url"
+          loading="lazy"
+          class="w-full h-full object-cover rounded-2xl"
+          @load="imageLoaded = true"
+          @error="imageLoaded = true"
+        />
       </div>
 
       <!-- Action Arrow -->
@@ -132,6 +142,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
@@ -143,6 +154,8 @@ defineProps<Props>()
 defineEmits<{
   click: []
 }>()
+
+const imageLoaded = ref(false)
 
 const getCategoryIcon = (category: string) => {
   const icons: Record<string, string> = {

@@ -387,7 +387,8 @@ export const mockReports: Report[] = [
     id: '1',
     resident_id: '1',
     title: 'Large Pothole on Main Street',
-    description: 'There is a dangerous pothole near the intersection of Main Street and Oak Avenue. It has been growing larger and is causing damage to vehicles. The hole is approximately 3 feet wide and 8 inches deep.',
+    description:
+      'There is a dangerous pothole near the intersection of Main Street and Oak Avenue. It has been growing larger and is causing damage to vehicles. The hole is approximately 3 feet wide and 8 inches deep.',
     category: 'roads',
     location: 'Main Street & Oak Avenue Intersection',
     photo_url: 'https://images.unsplash.com/photo-1725373901914-e059ab755508?w=400',
@@ -404,7 +405,8 @@ export const mockReports: Report[] = [
     id: '2',
     resident_id: '2',
     title: 'Broken Streetlight',
-    description: 'The streetlight at the corner of Pine Street is not working, making the area unsafe at night. This has been an issue for over a week.',
+    description:
+      'The streetlight at the corner of Pine Street is not working, making the area unsafe at night. This has been an issue for over a week.',
     category: 'electricity',
     location: 'Pine Street Corner',
     status: 'resolved',
@@ -412,7 +414,8 @@ export const mockReports: Report[] = [
     latitude: 40.715,
     priority: 'medium',
     assigned_to: '9',
-    resolution_comment: 'Streetlight repaired and tested. New LED bulb installed and wiring checked.',
+    resolution_comment:
+      'Streetlight repaired and tested. New LED bulb installed and wiring checked.',
     actual_completion: '2025-01-04T09:15:00Z',
     created_at: '2025-01-03T16:45:00Z',
     updated_at: '2025-01-04T09:15:00Z',
@@ -421,7 +424,8 @@ export const mockReports: Report[] = [
     id: '3',
     resident_id: '1',
     title: 'Overflowing Garbage Bin',
-    description: 'The public garbage bin near the park entrance has been overflowing for several days. This is attracting pests and creating an unpleasant smell.',
+    description:
+      'The public garbage bin near the park entrance has been overflowing for several days. This is attracting pests and creating an unpleasant smell.',
     category: 'waste',
     location: 'Central Park Entrance',
     photo_url: 'https://images.unsplash.com/photo-1704756082548-af7c773aa0ef?q=80&w=400',
@@ -438,7 +442,8 @@ export const mockReports: Report[] = [
     id: '4',
     resident_id: '4',
     title: 'Water Main Break on Elm Street',
-    description: 'There appears to be a water main break causing flooding on Elm Street. Water is gushing from underground and affecting traffic flow.',
+    description:
+      'There appears to be a water main break causing flooding on Elm Street. Water is gushing from underground and affecting traffic flow.',
     category: 'water',
     location: 'Elm Street between 5th and 6th Avenue',
     photo_url: 'https://plus.unsplash.com/premium_photo-1727294768307-99c8c8852683?w=400',
@@ -455,7 +460,8 @@ export const mockReports: Report[] = [
     id: '5',
     resident_id: '5',
     title: 'Damaged Sidewalk Causing Trip Hazard',
-    description: 'Large crack in sidewalk on Maple Avenue creating a serious trip hazard. Several people have already stumbled.',
+    description:
+      'Large crack in sidewalk on Maple Avenue creating a serious trip hazard. Several people have already stumbled.',
     category: 'roads',
     location: 'Maple Avenue near Bus Stop 42',
     status: 'resolved',
@@ -463,7 +469,8 @@ export const mockReports: Report[] = [
     latitude: 40.7135,
     priority: 'medium',
     assigned_to: '6',
-    resolution_comment: 'Sidewalk repaired with new concrete. Area is now safe for pedestrian traffic.',
+    resolution_comment:
+      'Sidewalk repaired with new concrete. Area is now safe for pedestrian traffic.',
     actual_completion: '2025-01-02T16:30:00Z',
     created_at: '2024-12-28T11:15:00Z',
     updated_at: '2025-01-02T16:30:00Z',
@@ -472,7 +479,8 @@ export const mockReports: Report[] = [
     id: '6',
     resident_id: '7',
     title: 'Flickering Traffic Light',
-    description: 'Traffic light at the intersection of Broadway and 2nd Street is flickering intermittently, creating confusion for drivers.',
+    description:
+      'Traffic light at the intersection of Broadway and 2nd Street is flickering intermittently, creating confusion for drivers.',
     category: 'electricity',
     location: 'Broadway & 2nd Street Intersection',
     status: 'under_review',
@@ -488,7 +496,8 @@ export const mockReports: Report[] = [
     id: '7',
     resident_id: '8',
     title: 'Leaking Fire Hydrant',
-    description: 'Fire hydrant on Cedar Street is leaking continuously, wasting water and creating icy conditions in winter.',
+    description:
+      'Fire hydrant on Cedar Street is leaking continuously, wasting water and creating icy conditions in winter.',
     category: 'water',
     location: 'Cedar Street near House #245',
     photo_url: 'https://images.unsplash.com/photo-1623875342349-8badadea94dc?q=80&w=400',
@@ -505,7 +514,8 @@ export const mockReports: Report[] = [
     id: '8',
     resident_id: '9',
     title: 'Fallen Tree Blocking Bike Path',
-    description: "Large tree has fallen across the bike path in Riverside Park after yesterday's storm. Completely blocking access.",
+    description:
+      "Large tree has fallen across the bike path in Riverside Park after yesterday's storm. Completely blocking access.",
     category: 'safety',
     location: 'Riverside Park Bike Path - Section C',
     photo_url: 'https://images.unsplash.com/photo-1645208030178-d5771601c599?q=80&w=400',
@@ -523,7 +533,8 @@ export const mockReports: Report[] = [
     id: '9',
     resident_id: '10',
     title: 'Missing Stop Sign',
-    description: 'Stop sign at the corner of Willow and Third Street has been knocked down and removed. This intersection is now very dangerous.',
+    description:
+      'Stop sign at the corner of Willow and Third Street has been knocked down and removed. This intersection is now very dangerous.',
     category: 'safety',
     location: 'Willow Street & Third Street',
     status: 'under_review',
@@ -539,7 +550,8 @@ export const mockReports: Report[] = [
     id: '10',
     resident_id: '12',
     title: 'Graffiti on Public Building',
-    description: "Extensive graffiti has appeared on the side of the community center building. It's quite unsightly and should be cleaned.",
+    description:
+      "Extensive graffiti has appeared on the side of the community center building. It's quite unsightly and should be cleaned.",
     category: 'other',
     location: 'Community Center - West Wall',
     photo_url: 'https://images.unsplash.com/photo-1649960955169-4cd6db54a0fb?w=400',
@@ -554,7 +566,8 @@ export const mockReports: Report[] = [
     id: '11',
     resident_id: '13',
     title: 'Overflowing Storm Drain',
-    description: 'Storm drain on Oak Street is completely clogged and overflowing during rain, causing street flooding.',
+    description:
+      'Storm drain on Oak Street is completely clogged and overflowing during rain, causing street flooding.',
     category: 'water',
     location: 'Oak Street near Intersection with Elm',
     status: 'resolved',
@@ -571,7 +584,8 @@ export const mockReports: Report[] = [
     id: '12',
     resident_id: '14',
     title: 'Broken Playground Equipment',
-    description: "The swing set in Memorial Park has a broken chain on one of the swings. It's dangerous for children to use.",
+    description:
+      "The swing set in Memorial Park has a broken chain on one of the swings. It's dangerous for children to use.",
     category: 'safety',
     location: 'Memorial Park Playground',
     photo_url: 'https://images.unsplash.com/photo-1588357189875-0afebea1dc10?w=400',
@@ -586,7 +600,8 @@ export const mockReports: Report[] = [
     id: '13',
     resident_id: '15',
     title: 'Damaged Road Surface',
-    description: 'Multiple potholes and uneven pavement on Harrison Avenue making it difficult for vehicles to pass safely.',
+    description:
+      'Multiple potholes and uneven pavement on Harrison Avenue making it difficult for vehicles to pass safely.',
     category: 'roads',
     location: 'Harrison Avenue between 8th and 10th Street',
     status: 'under_review',
@@ -602,7 +617,8 @@ export const mockReports: Report[] = [
     id: '14',
     resident_id: '16',
     title: 'Illegal Dumping Site',
-    description: 'Someone has been illegally dumping construction waste in the vacant lot behind the shopping center.',
+    description:
+      'Someone has been illegally dumping construction waste in the vacant lot behind the shopping center.',
     category: 'waste',
     location: 'Vacant Lot - 123 Commerce Street',
     photo_url: 'https://images.unsplash.com/photo-1641125699360-c93f4f7c55d1?w=400',
@@ -611,7 +627,8 @@ export const mockReports: Report[] = [
     latitude: 40.7115,
     priority: 'medium',
     assigned_to: '3',
-    resolution_comment: 'Upon investigation, this is on private property. Property owner has been contacted.',
+    resolution_comment:
+      'Upon investigation, this is on private property. Property owner has been contacted.',
     actual_completion: '2024-12-26T14:10:00Z',
     created_at: '2024-12-25T09:20:00Z',
     updated_at: '2024-12-26T14:10:00Z',
@@ -620,7 +637,8 @@ export const mockReports: Report[] = [
     id: '15',
     resident_id: '17',
     title: 'Power Line Down After Storm',
-    description: "Power line is hanging dangerously low over Birch Street after last night's storm. Immediate attention needed.",
+    description:
+      "Power line is hanging dangerously low over Birch Street after last night's storm. Immediate attention needed.",
     category: 'electricity',
     location: 'Birch Street near House #156',
     status: 'resolved',
@@ -637,7 +655,8 @@ export const mockReports: Report[] = [
     id: '16',
     resident_id: '19',
     title: 'Broken Bus Shelter Glass',
-    description: 'The glass panel of the bus shelter on Fourth Avenue has been shattered. Sharp glass pieces are scattered around.',
+    description:
+      'The glass panel of the bus shelter on Fourth Avenue has been shattered. Sharp glass pieces are scattered around.',
     category: 'safety',
     location: 'Bus Shelter - Fourth Avenue & Main Street',
     status: 'under_review',
@@ -653,7 +672,8 @@ export const mockReports: Report[] = [
     id: '17',
     resident_id: '20',
     title: 'Cracked Water Pipe',
-    description: 'Small crack in exposed water pipe under the bridge on River Road. Water is slowly leaking.',
+    description:
+      'Small crack in exposed water pipe under the bridge on River Road. Water is slowly leaking.',
     category: 'water',
     location: 'River Road Bridge - Under Structure',
     status: 'pending',
@@ -667,7 +687,8 @@ export const mockReports: Report[] = [
     id: '18',
     resident_id: '21',
     title: 'Overgrown Vegetation Blocking Signs',
-    description: 'Bushes and tree branches have grown over street signs on Park Avenue, making them completely unreadable.',
+    description:
+      'Bushes and tree branches have grown over street signs on Park Avenue, making them completely unreadable.',
     category: 'other',
     location: 'Park Avenue - Multiple Locations',
     status: 'resolved',
@@ -684,7 +705,8 @@ export const mockReports: Report[] = [
     id: '19',
     resident_id: '22',
     title: 'Malfunctioning Pedestrian Crossing Signal',
-    description: "The pedestrian crossing signal at Fifth and Central is not working properly. The walk signal doesn't activate when button is pressed.",
+    description:
+      "The pedestrian crossing signal at Fifth and Central is not working properly. The walk signal doesn't activate when button is pressed.",
     category: 'electricity',
     location: 'Fifth Street & Central Avenue',
     status: 'pending',
@@ -698,7 +720,8 @@ export const mockReports: Report[] = [
     id: '20',
     resident_id: '4',
     title: 'Collapsed Retaining Wall',
-    description: 'The retaining wall along Creek Side Drive has partially collapsed, posing a safety risk and potential flooding issue.',
+    description:
+      'The retaining wall along Creek Side Drive has partially collapsed, posing a safety risk and potential flooding issue.',
     category: 'safety',
     location: 'Creek Side Drive - Mile Marker 2.3',
     photo_url: 'https://images.unsplash.com/photo-1696238900505-407e64af8da1?w=400',
@@ -715,7 +738,8 @@ export const mockReports: Report[] = [
     id: '21',
     resident_id: '5',
     title: 'Clogged Public Restroom',
-    description: "The public restroom in Washington Park is completely out of order. Multiple toilets are clogged and there's no running water.",
+    description:
+      "The public restroom in Washington Park is completely out of order. Multiple toilets are clogged and there's no running water.",
     category: 'water',
     location: 'Washington Park Public Restroom',
     status: 'resolved',
@@ -723,7 +747,8 @@ export const mockReports: Report[] = [
     latitude: 40.7151,
     priority: 'medium',
     assigned_to: '18',
-    resolution_comment: 'All plumbing issues resolved. Restroom thoroughly cleaned and operational.',
+    resolution_comment:
+      'All plumbing issues resolved. Restroom thoroughly cleaned and operational.',
     actual_completion: '2025-01-02T09:45:00Z',
     created_at: '2024-12-27T14:20:00Z',
     updated_at: '2025-01-02T09:45:00Z',
@@ -732,7 +757,8 @@ export const mockReports: Report[] = [
     id: '22',
     resident_id: '7',
     title: 'Burnt Out Street Light Cluster',
-    description: 'Three consecutive street lights on Sunset Boulevard are all burnt out, creating a dangerous dark zone at night.',
+    description:
+      'Three consecutive street lights on Sunset Boulevard are all burnt out, creating a dangerous dark zone at night.',
     category: 'electricity',
     location: 'Sunset Boulevard - Lights #34, #35, #36',
     status: 'under_review',
@@ -748,7 +774,8 @@ export const mockReports: Report[] = [
     id: '23',
     resident_id: '8',
     title: 'Loose Manhole Cover',
-    description: 'Manhole cover on Second Street is loose and makes a loud noise when vehicles pass over it. Could be dangerous.',
+    description:
+      'Manhole cover on Second Street is loose and makes a loud noise when vehicles pass over it. Could be dangerous.',
     category: 'roads',
     location: 'Second Street near the Post Office',
     status: 'under_review',
@@ -764,7 +791,8 @@ export const mockReports: Report[] = [
     id: '24',
     resident_id: '9',
     title: 'Abandoned Vehicle',
-    description: "Old rusted car has been abandoned in the public parking area for over two weeks. It's taking up space and is an eyesore.",
+    description:
+      "Old rusted car has been abandoned in the public parking area for over two weeks. It's taking up space and is an eyesore.",
     category: 'other',
     location: 'Public Parking Lot - Space #47',
     status: 'resolved',
@@ -772,7 +800,8 @@ export const mockReports: Report[] = [
     latitude: 40.7137,
     priority: 'low',
     assigned_to: '11',
-    resolution_comment: 'Abandoned vehicle removed from parking lot. Space available for public use.',
+    resolution_comment:
+      'Abandoned vehicle removed from parking lot. Space available for public use.',
     actual_completion: '2025-01-05T13:30:00Z',
     created_at: '2024-12-22T16:45:00Z',
     updated_at: '2025-01-05T13:30:00Z',
@@ -781,7 +810,8 @@ export const mockReports: Report[] = [
     id: '25',
     resident_id: '10',
     title: 'Broken Water Fountain',
-    description: "The water fountain in Lincoln Square has been broken for months. The water doesn't come out when you press the button.",
+    description:
+      "The water fountain in Lincoln Square has been broken for months. The water doesn't come out when you press the button.",
     category: 'water',
     location: 'Lincoln Square Water Fountain',
     status: 'rejected',
@@ -798,7 +828,8 @@ export const mockReports: Report[] = [
     id: '26',
     resident_id: '12',
     title: 'Dangerous Intersection',
-    description: 'The intersection of Mill Road and Highway 9 desperately needs a stop sign or traffic light. There have been multiple near-accidents.',
+    description:
+      'The intersection of Mill Road and Highway 9 desperately needs a stop sign or traffic light. There have been multiple near-accidents.',
     category: 'safety',
     location: 'Mill Road & Highway 9 Intersection',
     status: 'under_review',
@@ -814,7 +845,8 @@ export const mockReports: Report[] = [
     id: '27',
     resident_id: '13',
     title: 'Overflowing Recycling Bins',
-    description: 'The recycling bins at the community center are constantly overflowing. We need additional bins or more frequent pickup.',
+    description:
+      'The recycling bins at the community center are constantly overflowing. We need additional bins or more frequent pickup.',
     category: 'waste',
     location: 'Community Center Recycling Area',
     photo_url: 'https://images.unsplash.com/photo-1604609865013-7e00416561c3?w=400',
@@ -831,7 +863,8 @@ export const mockReports: Report[] = [
     id: '28',
     resident_id: '14',
     title: 'Faded Road Markings',
-    description: 'The lane markings and crosswalk lines on Tenth Avenue are severely faded and barely visible, especially at night.',
+    description:
+      'The lane markings and crosswalk lines on Tenth Avenue are severely faded and barely visible, especially at night.',
     category: 'roads',
     location: 'Tenth Avenue - Full Length',
     status: 'pending',
@@ -845,7 +878,8 @@ export const mockReports: Report[] = [
     id: '29',
     resident_id: '15',
     title: 'Exposed Electrical Wires',
-    description: 'Electrical wires are hanging exposed from a utility pole on Maple Street after recent construction work. Very dangerous situation.',
+    description:
+      'Electrical wires are hanging exposed from a utility pole on Maple Street after recent construction work. Very dangerous situation.',
     category: 'electricity',
     location: 'Maple Street - Utility Pole #QR-789',
     status: 'resolved',
@@ -862,7 +896,8 @@ export const mockReports: Report[] = [
     id: '30',
     resident_id: '16',
     title: 'Vandalized Park Bench',
-    description: 'Park bench in Riverside Park has been vandalized with deep cuts in the wood making it unusable and potentially dangerous.',
+    description:
+      'Park bench in Riverside Park has been vandalized with deep cuts in the wood making it unusable and potentially dangerous.',
     category: 'other',
     location: 'Riverside Park - Bench Near Pond',
     photo_url: 'https://images.unsplash.com/photo-1665111911876-14e8409444aa?w=400',
@@ -880,7 +915,8 @@ export const mockReports: Report[] = [
     id: '31',
     resident_id: '17',
     title: 'Broken Curb Creating Drainage Issue',
-    description: 'Broken curb on Seventh Street is preventing proper water drainage, causing puddles and potential flooding during heavy rain.',
+    description:
+      'Broken curb on Seventh Street is preventing proper water drainage, causing puddles and potential flooding during heavy rain.',
     category: 'roads',
     location: 'Seventh Street near Fire Station',
     status: 'under_review',
@@ -896,7 +932,8 @@ export const mockReports: Report[] = [
     id: '32',
     resident_id: '19',
     title: 'Malfunctioning Security Light',
-    description: 'The security light in the public parking garage on Level 2 keeps flickering on and off, creating safety concerns.',
+    description:
+      'The security light in the public parking garage on Level 2 keeps flickering on and off, creating safety concerns.',
     category: 'electricity',
     location: 'Public Parking Garage - Level 2, Section B',
     status: 'under_review',
@@ -918,7 +955,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Report received and assigned to road maintenance team. Inspection scheduled for tomorrow morning. This appears to be a priority issue due to the size and location.',
+    admin_comment:
+      'Report received and assigned to road maintenance team. Inspection scheduled for tomorrow morning. This appears to be a priority issue due to the size and location.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-06T14:20:00Z',
@@ -930,7 +968,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Streetlight has been repaired and is now working properly. Our electrical team replaced the faulty bulb and checked the wiring. Thank you for reporting this safety issue.',
+    admin_comment:
+      'Streetlight has been repaired and is now working properly. Our electrical team replaced the faulty bulb and checked the wiring. Thank you for reporting this safety issue.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-04T09:15:00Z',
@@ -942,7 +981,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Emergency response team has been dispatched to assess the water main break. We are coordinating with the water department to isolate the affected area.',
+    admin_comment:
+      'Emergency response team has been dispatched to assess the water main break. We are coordinating with the water department to isolate the affected area.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-08T15:45:00Z',
@@ -954,7 +994,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Sidewalk repair crew will assess the damage and provide repair timeline. Temporary warning signs have been placed.',
+    admin_comment:
+      'Sidewalk repair crew will assess the damage and provide repair timeline. Temporary warning signs have been placed.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2024-12-29T10:30:00Z',
@@ -966,7 +1007,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Sidewalk has been completely repaired with new concrete. The area is now safe for pedestrian traffic. Thank you for bringing this to our attention.',
+    admin_comment:
+      'Sidewalk has been completely repaired with new concrete. The area is now safe for pedestrian traffic. Thank you for bringing this to our attention.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-02T16:30:00Z',
@@ -978,7 +1020,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Water maintenance team has been notified. We will inspect the hydrant and determine if it needs repair or replacement.',
+    admin_comment:
+      'Water maintenance team has been notified. We will inspect the hydrant and determine if it needs repair or replacement.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-05T10:15:00Z',
@@ -990,7 +1033,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Parks department crew is preparing to remove the fallen tree. Safety barriers have been put in place.',
+    admin_comment:
+      'Parks department crew is preparing to remove the fallen tree. Safety barriers have been put in place.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-02T12:15:00Z',
@@ -1002,7 +1046,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Tree has been completely removed and bike path is now clear. The path has been inspected for any damage and deemed safe for use.',
+    admin_comment:
+      'Tree has been completely removed and bike path is now clear. The path has been inspected for any damage and deemed safe for use.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-03T14:45:00Z',
@@ -1014,7 +1059,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Traffic safety team is prioritizing this issue. Temporary stop signs will be installed while we order a permanent replacement.',
+    admin_comment:
+      'Traffic safety team is prioritizing this issue. Temporary stop signs will be installed while we order a permanent replacement.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-06T08:30:00Z',
@@ -1026,7 +1072,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Storm drain cleaning crew has been scheduled. This will be addressed during the next maintenance cycle.',
+    admin_comment:
+      'Storm drain cleaning crew has been scheduled. This will be addressed during the next maintenance cycle.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2025-01-01T09:30:00Z',
@@ -1038,7 +1085,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Storm drain has been thoroughly cleaned and is now functioning properly. Debris removal was completed and the drainage system is working efficiently.',
+    admin_comment:
+      'Storm drain has been thoroughly cleaned and is now functioning properly. Debris removal was completed and the drainage system is working efficiently.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2025-01-03T11:20:00Z',
@@ -1050,7 +1098,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Road maintenance team will conduct a full assessment of Harrison Avenue. This may require significant repair work.',
+    admin_comment:
+      'Road maintenance team will conduct a full assessment of Harrison Avenue. This may require significant repair work.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-05T13:45:00Z',
@@ -1062,7 +1111,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '3',
     previous_status: 'pending',
     new_status: 'rejected',
-    admin_comment: 'Upon investigation, this appears to be on private property. Please contact the property owner directly. The city cannot take action on private land without permission.',
+    admin_comment:
+      'Upon investigation, this appears to be on private property. Please contact the property owner directly. The city cannot take action on private land without permission.',
     updated_by: 'Admin User',
     is_public: true,
     created_at: '2024-12-26T14:10:00Z',
@@ -1074,7 +1124,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Emergency electrical team has been dispatched immediately. Area has been cordoned off for public safety.',
+    admin_comment:
+      'Emergency electrical team has been dispatched immediately. Area has been cordoned off for public safety.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-01T08:30:00Z',
@@ -1086,7 +1137,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Power line has been properly secured and repaired. Electrical service has been fully restored to the area. Safety inspection completed.',
+    admin_comment:
+      'Power line has been properly secured and repaired. Electrical service has been fully restored to the area. Safety inspection completed.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-01T14:20:00Z',
@@ -1098,7 +1150,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Public works team will clean up the glass and board up the shelter temporarily. Replacement glass has been ordered.',
+    admin_comment:
+      'Public works team will clean up the glass and board up the shelter temporarily. Replacement glass has been ordered.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2025-01-06T09:15:00Z',
@@ -1110,7 +1163,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Parks maintenance crew will trim the vegetation blocking the signs. This should be completed within the next few days.',
+    admin_comment:
+      'Parks maintenance crew will trim the vegetation blocking the signs. This should be completed within the next few days.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2024-12-22T14:45:00Z',
@@ -1122,7 +1176,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'All vegetation has been trimmed back and street signs are now clearly visible. Regular maintenance schedule has been updated to prevent this issue.',
+    admin_comment:
+      'All vegetation has been trimmed back and street signs are now clearly visible. Regular maintenance schedule has been updated to prevent this issue.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2024-12-28T10:30:00Z',
@@ -1134,7 +1189,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '3',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Engineering team will assess the structural integrity of the retaining wall. This is a high priority safety issue.',
+    admin_comment:
+      'Engineering team will assess the structural integrity of the retaining wall. This is a high priority safety issue.',
     updated_by: 'Admin User',
     is_public: true,
     created_at: '2025-01-04T16:30:00Z',
@@ -1146,7 +1202,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Facilities maintenance team will address the plumbing issues in the park restroom. Temporary closure may be necessary.',
+    admin_comment:
+      'Facilities maintenance team will address the plumbing issues in the park restroom. Temporary closure may be necessary.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2024-12-28T11:15:00Z',
@@ -1158,7 +1215,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'All plumbing issues have been resolved. Restroom has been thoroughly cleaned and is now fully operational.',
+    admin_comment:
+      'All plumbing issues have been resolved. Restroom has been thoroughly cleaned and is now fully operational.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2025-01-02T09:45:00Z',
@@ -1170,7 +1228,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Road maintenance crew will inspect and secure the manhole cover. This type of issue can be a safety hazard.',
+    admin_comment:
+      'Road maintenance crew will inspect and secure the manhole cover. This type of issue can be a safety hazard.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-06T11:20:00Z',
@@ -1182,7 +1241,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Vehicle removal team has been contacted. We will attempt to contact the owner before towing.',
+    admin_comment:
+      'Vehicle removal team has been contacted. We will attempt to contact the owner before towing.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-02T10:15:00Z',
@@ -1194,7 +1254,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Abandoned vehicle has been removed from the parking lot. The space is now available for public use.',
+    admin_comment:
+      'Abandoned vehicle has been removed from the parking lot. The space is now available for public use.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-05T13:30:00Z',
@@ -1206,7 +1267,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '3',
     previous_status: 'pending',
     new_status: 'rejected',
-    admin_comment: 'After assessment, the cost of repair versus usage does not justify the expense at this time. We will consider this in future budget planning.',
+    admin_comment:
+      'After assessment, the cost of repair versus usage does not justify the expense at this time. We will consider this in future budget planning.',
     updated_by: 'Admin User',
     is_public: true,
     created_at: '2024-11-20T14:15:00Z',
@@ -1218,7 +1280,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Traffic engineering team will conduct a comprehensive safety study of this intersection. This may take several weeks to complete.',
+    admin_comment:
+      'Traffic engineering team will conduct a comprehensive safety study of this intersection. This may take several weeks to complete.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-06T15:20:00Z',
@@ -1230,7 +1293,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Emergency electrical team is responding immediately. This is an extremely dangerous situation that requires immediate attention.',
+    admin_comment:
+      'Emergency electrical team is responding immediately. This is an extremely dangerous situation that requires immediate attention.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2024-12-29T15:00:00Z',
@@ -1242,7 +1306,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '18',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Exposed wires have been properly secured and electrical safety has been restored. Area has been inspected and cleared for normal use.',
+    admin_comment:
+      'Exposed wires have been properly secured and electrical safety has been restored. Area has been inspected and cleared for normal use.',
     updated_by: 'Nicole Hall',
     is_public: true,
     created_at: '2024-12-30T08:20:00Z',
@@ -1254,7 +1319,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Parks maintenance will assess the damage and determine if the bench can be repaired or needs replacement.',
+    admin_comment:
+      'Parks maintenance will assess the damage and determine if the bench can be repaired or needs replacement.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2024-12-19T08:30:00Z',
@@ -1266,7 +1332,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'under_review',
     new_status: 'resolved',
-    admin_comment: 'Bench has been replaced with a new one. The damaged bench was removed and recycled appropriately.',
+    admin_comment:
+      'Bench has been replaced with a new one. The damaged bench was removed and recycled appropriately.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2024-12-22T10:45:00Z',
@@ -1278,7 +1345,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '3',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Road maintenance team will evaluate the curb damage and its impact on drainage. Repair work will be scheduled accordingly.',
+    admin_comment:
+      'Road maintenance team will evaluate the curb damage and its impact on drainage. Repair work will be scheduled accordingly.',
     updated_by: 'Admin User',
     is_public: true,
     created_at: '2025-01-07T09:30:00Z',
@@ -1290,7 +1358,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Electrical team is investigating the flickering traffic light. Temporary manual traffic direction may be needed.',
+    admin_comment:
+      'Electrical team is investigating the flickering traffic light. Temporary manual traffic direction may be needed.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-07T10:15:00Z',
@@ -1346,7 +1415,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Emergency lighting repair crew dispatched for the three consecutive burnt out street lights. This is a safety priority.',
+    admin_comment:
+      'Emergency lighting repair crew dispatched for the three consecutive burnt out street lights. This is a safety priority.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-08T08:00:00Z',
@@ -1358,7 +1428,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '11',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Waste management is reviewing the recycling pickup schedule. Additional bins may be installed.',
+    admin_comment:
+      'Waste management is reviewing the recycling pickup schedule. Additional bins may be installed.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-08T09:30:00Z',
@@ -1369,7 +1440,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     report_id: '28',
     admin_id: '3',
     new_status: 'pending',
-    admin_comment: 'Road marking visibility issue reported. Road maintenance team will schedule repainting.',
+    admin_comment:
+      'Road marking visibility issue reported. Road maintenance team will schedule repainting.',
     updated_by: 'Admin User',
     is_public: true,
     created_at: '2025-01-06T12:30:00Z',
@@ -1381,7 +1453,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '9',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Facilities team will replace the malfunctioning security light in the parking garage. Safety is our priority.',
+    admin_comment:
+      'Facilities team will replace the malfunctioning security light in the parking garage. Safety is our priority.',
     updated_by: 'Robert Taylor',
     is_public: true,
     created_at: '2025-01-08T11:45:00Z',
@@ -1393,7 +1466,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     admin_id: '6',
     previous_status: 'pending',
     new_status: 'under_review',
-    admin_comment: 'Waste management team will address the overflowing garbage bin. Additional pickup has been scheduled.',
+    admin_comment:
+      'Waste management team will address the overflowing garbage bin. Additional pickup has been scheduled.',
     updated_by: 'Sarah Wilson',
     is_public: true,
     created_at: '2025-01-07T14:30:00Z',
@@ -1415,7 +1489,8 @@ export const mockStatusUpdates: StatusUpdate[] = [
     report_id: '27',
     admin_id: '11',
     new_status: 'pending',
-    admin_comment: 'Recycling overflow issue reported. Waste management will review pickup schedule.',
+    admin_comment:
+      'Recycling overflow issue reported. Waste management will review pickup schedule.',
     updated_by: 'James Thomas',
     is_public: true,
     created_at: '2025-01-07T11:15:00Z',
@@ -1593,35 +1668,35 @@ export const mockNotifications: Notification[] = [
 
 // Helper functions for data manipulation
 export const getUsersByRole = (role: User['role']): User[] => {
-  return mockUsers.filter(user => user.role === role)
+  return mockUsers.filter((user) => user.role === role)
 }
 
 export const getReportsByCategory = (category: Report['category']): Report[] => {
-  return mockReports.filter(report => report.category === category)
+  return mockReports.filter((report) => report.category === category)
 }
 
 export const getReportsByStatus = (status: Report['status']): Report[] => {
-  return mockReports.filter(report => report.status === status)
+  return mockReports.filter((report) => report.status === status)
 }
 
 export const getReportsAssignedToUser = (userId: string): Report[] => {
-  return mockReports.filter(report => report.assigned_to === userId)
+  return mockReports.filter((report) => report.assigned_to === userId)
 }
 
 export const getUnreadNotifications = (userId: string): Notification[] => {
-  return mockNotifications.filter(notification => 
-    notification.user_id === userId && !notification.is_read
+  return mockNotifications.filter(
+    (notification) => notification.user_id === userId && !notification.is_read,
   )
 }
 
 export const getReportStatusHistory = (reportId: string): StatusUpdate[] => {
   return mockStatusUpdates
-    .filter(update => update.report_id === reportId)
+    .filter((update) => update.report_id === reportId)
     .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
 }
 
 // Current user simulation (this would normally come from authentication)
 export const getCurrentUser = (): User | null => {
   // For demo purposes, return the super admin user
-  return mockUsers.find(user => user.id === '11') || null
+  return mockUsers.find((user) => user.id === '11') || null
 }

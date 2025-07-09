@@ -212,12 +212,21 @@
               <StatusBadge :status="report.status" class="ml-4" />
             </div>
 
-            <div v-if="report.photo_url" class="mb-4">
+            <div class="mb-4">
               <div
+                v-if="!imageLoaded && report.photo_url"
                 class="w-full h-32 bg-gradient-to-br from-muted to-border rounded-2xl flex items-center justify-center"
               >
                 <span class="text-text-muted text-sm">📸 Photo Available</span>
               </div>
+              <img
+                v-if="report.photo_url"
+                v-show="imageLoaded"
+                :src="report.photo_url"
+                loading="lazy"
+                class="w-full h-32 object-cover rounded-2xl"
+                @load="imageLoaded = true"
+              />
             </div>
 
             <div class="flex items-center justify-between text-xs text-text-muted">
@@ -728,6 +737,7 @@ import StatusBadge from '@/components/shared/StatusBadge.vue'
 
 const router = useRouter()
 const howItWorks: Ref<HTMLElement | null> = ref(null)
+const imageLoaded = ref(false)
 
 // Recent reports (show first 6)
 const recentReports = computed(() => mockReports.slice(0, 6))

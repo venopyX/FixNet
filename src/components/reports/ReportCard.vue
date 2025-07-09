@@ -32,6 +32,7 @@
     <!-- Photo -->
     <div v-if="report.photo_url" class="mb-4">
       <div
+        v-if="!imageLoaded"
         class="w-full h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center"
       >
         <svg
@@ -53,6 +54,15 @@
           />
         </svg>
       </div>
+      <img
+        v-if="report.photo_url"
+        v-show="imageLoaded"
+        :src="report.photo_url"
+        loading="lazy"
+        class="w-full h-32 object-cover rounded-2xl"
+        @load="imageLoaded = true"
+        @error="imageLoaded = true"
+      />
     </div>
 
     <!-- Footer -->
@@ -89,6 +99,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
@@ -97,11 +108,13 @@ interface Props {
 }
 
 interface Emits {
-  viewReport: []
+  (e: 'viewReport'): void
 }
 
 defineProps<Props>()
 defineEmits<Emits>()
+
+const imageLoaded = ref(false) // Reactive state for image loading
 
 const getCategoryIcon = (category: string) => {
   const icons: Record<string, string> = {

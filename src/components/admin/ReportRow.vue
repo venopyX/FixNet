@@ -4,7 +4,7 @@
     <td class="px-6 py-4">
       <div class="flex items-start gap-3">
         <div
-          v-if="report.photo_url"
+          v-if="report.photo_url && !imageLoaded"
           class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
         >
           <svg
@@ -26,6 +26,15 @@
             />
           </svg>
         </div>
+        <img
+          v-if="report.photo_url"
+          v-show="imageLoaded"
+          :src="report.photo_url"
+          loading="lazy"
+          class="w-12 h-12 object-cover rounded-lg flex-shrink-0"
+          @load="imageLoaded = true"
+          @error="imageLoaded = true"
+        />
         <div class="min-w-0 flex-1">
           <h4 class="font-medium text-text-primary truncate">{{ report.title }}</h4>
           <p class="text-sm text-text-secondary truncate mt-1">{{ report.location }}</p>
@@ -123,6 +132,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
@@ -131,12 +141,14 @@ interface Props {
 }
 
 interface Emits {
-  updateStatus: []
-  viewDetails: []
+  (e: 'updateStatus'): void
+  (e: 'viewDetails'): void
 }
 
 defineProps<Props>()
 defineEmits<Emits>()
+
+const imageLoaded = ref(false) // Reactive state for image loading
 
 const getCategoryIcon = (category: string) => {
   const icons: Record<string, string> = {
