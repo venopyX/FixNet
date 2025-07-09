@@ -32,6 +32,12 @@ const routes = [
     component: () => import('@/views/AgencyView.vue'),
   },
   {
+    path: '/agency/dashboard',
+    name: 'AgencyDashboard',
+    component: () => import('@/views/AgencyDashboardView.vue'),
+    meta: { requiresAuth: true, role: 'agency_staff' },
+  },
+  {
     path: '/profile/:id',
     name: 'UserProfile',
     component: () => import('@/views/UserProfileView.vue'),
