@@ -4,7 +4,6 @@
   >
     <div class="container mx-auto px-6">
       <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
         <div class="flex items-center">
           <router-link to="/" class="flex items-center space-x-3" @click.prevent="handleLogoClick">
             <div
@@ -12,11 +11,10 @@
             >
               <span class="text-white font-bold text-sm">FA</span>
             </div>
-            <span class="font-bold text-xl text-text-primary">FixNet</span>
+            <span class="font-bold text-xl text-text-primary">FixMyArea</span>
           </router-link>
         </div>
 
-        <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-2">
           <router-link
             to="/reports"
@@ -39,7 +37,7 @@
             Browse Reports
           </router-link>
           <a
-            href="/#how-it-works"
+            href="#how-it-works"
             class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             <svg
@@ -58,7 +56,7 @@
             How It Works
           </a>
           <a
-            href="/#features"
+            href="#features"
             class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
           >
             <svg
@@ -74,7 +72,7 @@
           </a>
         </div>
 
-        <!-- Desktop Auth Buttons -->
+        <!-- Not Authenticated -->
         <div v-if="!isAuthenticated" class="hidden md:flex items-center space-x-3">
           <router-link
             to="/auth"
@@ -96,7 +94,7 @@
             Sign In
           </router-link>
           <router-link
-            to="/auth#sign-up"
+            to="/auth"
             class="claybutton inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-5 py-2 rounded-xl font-medium shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-0 focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <svg
@@ -112,16 +110,11 @@
           </router-link>
         </div>
 
-        <!-- Desktop Authenticated User Menu -->
+        <!-- Authenticated User Menu -->
         <div v-else class="hidden md:flex items-center space-x-3">
-          <div class="flex items-center gap-3 mr-2">
-            <div class="claycard bg-primary/10 px-3 py-1 rounded-full">
-              <span class="text-primary text-sm font-medium">{{ currentUser?.first_name }}</span>
-            </div>
-          </div>
           <router-link
             :to="currentUser?.role === 'admin' ? '/admin' : '/dashboard'"
-            class="claybutton inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl font-medium hover:scale-105 transition-all duration-200"
+            class="claybutton inline-flex items-center gap-2 text-text-secondary hover:text-primary bg-surface hover:bg-primary/5 px-4 py-2 rounded-xl font-medium transition-all duration-200"
           >
             <svg
               class="w-4 h-4"
@@ -138,25 +131,149 @@
             </svg>
             Dashboard
           </router-link>
-          <button
-            @click="handleLogout"
-            class="claybutton inline-flex items-center gap-2 border border-border text-text-secondary bg-surface px-4 py-2 rounded-xl font-medium hover:bg-muted hover:text-text-primary transition-all duration-200"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
+
+          <!-- Profile Dropdown -->
+          <div class="relative" v-click-outside="closeProfileMenu">
+            <button
+              @click="toggleProfileMenu"
+              class="claybutton inline-flex items-center gap-3 text-text-primary bg-surface hover:bg-primary/5 px-4 py-2 rounded-xl font-medium transition-all duration-200 border border-border hover:border-primary/20"
+              :class="{ 'bg-primary/10 border-primary/20': showProfileMenu }"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            Sign Out
-          </button>
+              <div
+                class="w-8 h-8 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center"
+              >
+                <span class="text-primary font-semibold text-sm">
+                  {{ getInitials(currentUser?.first_name, currentUser?.last_name) }}
+                </span>
+              </div>
+              <span class="hidden sm:inline">{{ currentUser?.first_name }}</span>
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                :class="{ 'rotate-180': showProfileMenu }"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Profile Dropdown Menu -->
+            <Transition name="dropdown">
+              <div
+                v-if="showProfileMenu"
+                class="absolute right-0 top-full mt-2 w-64 claycard bg-surface border border-border/50 rounded-2xl shadow-xl z-50"
+              >
+                <div class="p-4">
+                  <!-- User Info -->
+                  <div class="flex items-center gap-3 mb-4 pb-4 border-b border-border/50">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center"
+                    >
+                      <span class="text-primary font-bold text-lg">
+                        {{ getInitials(currentUser?.first_name, currentUser?.last_name) }}
+                      </span>
+                    </div>
+                    <div>
+                      <div class="font-semibold text-text-primary">
+                        {{ currentUser?.first_name }} {{ currentUser?.last_name }}
+                      </div>
+                      <div class="text-sm text-text-secondary capitalize">
+                        {{ currentUser?.role }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Menu Items -->
+                  <div class="space-y-1">
+                    <router-link
+                      :to="`/profile/${currentUser?.id}`"
+                      @click="closeProfileMenu"
+                      class="claybutton flex items-center gap-3 w-full px-3 py-2 rounded-xl text-text-secondary hover:text-primary hover:bg-primary/5 transition-all duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <span>View Profile</span>
+                    </router-link>
+
+                    <button
+                      @click="openEditProfile"
+                      class="claybutton flex items-center gap-3 w-full px-3 py-2 rounded-xl text-text-secondary hover:text-primary hover:bg-primary/5 transition-all duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                      <span>Edit Profile</span>
+                    </button>
+
+                    <button
+                      @click="shareProfile"
+                      class="claybutton flex items-center gap-3 w-full px-3 py-2 rounded-xl text-text-secondary hover:text-secondary hover:bg-secondary/5 transition-all duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                        />
+                      </svg>
+                      <span>Share Profile</span>
+                    </button>
+
+                    <div class="border-t border-border/50 mt-2 pt-2">
+                      <button
+                        @click="handleLogout"
+                        class="claybutton flex items-center gap-3 w-full px-3 py-2 rounded-xl text-error hover:bg-error/5 transition-all duration-200"
+                      >
+                        <svg
+                          class="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                          />
+                        </svg>
+                        <span>Sign Out</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Transition>
+          </div>
         </div>
 
         <!-- Mobile menu button -->
@@ -222,7 +339,7 @@
                 <span class="font-medium">Browse Reports</span>
               </router-link>
               <a
-                href="/#how-it-works"
+                href="#how-it-works"
                 class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
@@ -242,7 +359,7 @@
                 <span class="font-medium">How It Works</span>
               </a>
               <a
-                href="/#features"
+                href="#features"
                 class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
@@ -286,7 +403,7 @@
                 <span>Sign In</span>
               </router-link>
               <router-link
-                to="/auth#sign-up"
+                to="/auth"
                 class="claybutton flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-medium shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
@@ -307,28 +424,46 @@
             <div v-else class="border-t border-border/50 pt-4 space-y-3">
               <!-- User Info -->
               <div class="px-4 py-2">
-                <div class="claycard bg-primary/10 text-primary px-4 py-3 rounded-xl text-center">
-                  <div class="flex items-center justify-center gap-2 mb-1">
-                    <svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
+                <div class="claycard bg-primary/10 text-primary px-4 py-3 rounded-xl">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    <span class="font-medium"
-                      >{{ currentUser?.first_name }} {{ currentUser?.last_name }}</span
-                    >
+                      <span class="text-primary font-semibold">
+                        {{ getInitials(currentUser?.first_name, currentUser?.last_name) }}
+                      </span>
+                    </div>
+                    <div>
+                      <div class="font-medium">
+                        {{ currentUser?.first_name }} {{ currentUser?.last_name }}
+                      </div>
+                      <div class="text-sm opacity-75 capitalize">{{ currentUser?.role }}</div>
+                    </div>
                   </div>
-                  <span class="text-sm opacity-75 capitalize">{{ currentUser?.role }}</span>
                 </div>
               </div>
+
+              <!-- Profile Links -->
+              <router-link
+                :to="`/profile/${currentUser?.id}`"
+                class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
+                @click="closeMobileMenu"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <span class="font-medium">View Profile</span>
+              </router-link>
 
               <!-- Dashboard Link -->
               <router-link
@@ -377,6 +512,17 @@
         </div>
       </Transition>
     </div>
+
+    <!-- Profile Edit Modal -->
+    <ProfileEditModal
+      :show="showEditModal"
+      :user="currentUser"
+      @close="closeEditProfile"
+      @updated="handleProfileUpdate"
+    />
+
+    <!-- Share Profile Modal -->
+    <ShareProfileModal :show="showShareModal" :user="currentUser" @close="closeShareProfile" />
   </nav>
 </template>
 
@@ -384,17 +530,36 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { isAuthenticated, currentUser, authService } from '@/utils/auth'
+import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
+import ShareProfileModal from '@/components/profile/ShareProfileModal.vue'
 
 const showMobileMenu = ref(false)
+const showProfileMenu = ref(false)
+const showEditModal = ref(false)
+const showShareModal = ref(false)
 const router = useRouter()
 const route = useRoute()
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
+  if (showMobileMenu.value) {
+    showProfileMenu.value = false
+  }
+}
+
+const toggleProfileMenu = () => {
+  showProfileMenu.value = !showProfileMenu.value
+  if (showProfileMenu.value) {
+    showMobileMenu.value = false
+  }
 }
 
 const closeMobileMenu = () => {
   showMobileMenu.value = false
+}
+
+const closeProfileMenu = () => {
+  showProfileMenu.value = false
 }
 
 const handleLogoClick = () => {
@@ -404,12 +569,57 @@ const handleLogoClick = () => {
     router.push('/')
   }
   closeMobileMenu()
+  closeProfileMenu()
 }
 
 const handleLogout = () => {
   authService.logout()
   router.push('/')
   closeMobileMenu()
+  closeProfileMenu()
+}
+
+const openEditProfile = () => {
+  showEditModal.value = true
+  closeProfileMenu()
+}
+
+const closeEditProfile = () => {
+  showEditModal.value = false
+}
+
+const shareProfile = () => {
+  showShareModal.value = true
+  closeProfileMenu()
+}
+
+const closeShareProfile = () => {
+  showShareModal.value = false
+}
+
+const handleProfileUpdate = () => {
+  // Profile updated successfully
+  closeEditProfile()
+}
+
+const getInitials = (firstName?: string, lastName?: string) => {
+  if (!firstName || !lastName) return 'U'
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
+}
+
+// Click outside directive for closing dropdowns
+const vClickOutside = {
+  beforeMount(el: HTMLElement, binding: any) {
+    el.clickOutsideEvent = (event: Event) => {
+      if (!(el === event.target || el.contains(event.target as Node))) {
+        binding.value()
+      }
+    }
+    document.addEventListener('click', el.clickOutsideEvent)
+  },
+  unmounted(el: HTMLElement) {
+    document.removeEventListener('click', el.clickOutsideEvent)
+  },
 }
 </script>
 
@@ -435,5 +645,28 @@ const handleLogout = () => {
 .slide-down-leave-from {
   opacity: 1;
   transform: translateY(0) scaleY(1);
+}
+
+/* Dropdown animation */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top right;
+}
+
+.dropdown-enter-from {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.95);
+}
+
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+}
+
+.dropdown-enter-to,
+.dropdown-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 </style>
