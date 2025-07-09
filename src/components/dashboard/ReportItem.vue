@@ -86,10 +86,11 @@
       </div>
 
       <!-- Photo Preview -->
-      <div v-if="report.photo_url" class="lg:w-24 lg:h-24 w-full h-32">
+      <div v-if="report.photo_url" class="lg:w-24 lg:h-24 w-full h-32 relative">
+        <!-- Loader (shown until image loads) -->
         <div
-          v-if="!imageLoaded"
-          class="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center"
+          v-if="!isImageLoaded(report.id)"
+          class="absolute inset-0 w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center z-10"
         >
           <svg
             class="w-8 h-8 text-primary"
@@ -112,12 +113,16 @@
         </div>
         <img
           v-if="report.photo_url"
-          v-show="imageLoaded"
           :src="report.photo_url"
           loading="lazy"
-          class="w-full h-full object-cover rounded-2xl"
-          @load="imageLoaded = true"
-          @error="imageLoaded = true"
+          class="w-full h-full object-cover rounded-2xl transition-opacity duration-300"
+          :class="{
+            'opacity-100': isImageLoaded(report.id),
+            'opacity-0': !isImageLoaded(report.id),
+          }"
+          @load="handleImageLoad(report.id)"
+          @error="handleImageError(report.id)"
+          alt="Report photo"
         />
       </div>
 
@@ -142,7 +147,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive } from 'vue'
 import { type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
@@ -155,7 +160,18 @@ defineEmits<{
   click: []
 }>()
 
-const imageLoaded = ref(false)
+// Use a reactive object keyed by report ID for proper image load handling
+const imageLoadStates = reactive<Record<string, boolean>>({})
+
+const isImageLoaded = (id: string) => imageLoadStates[id] === true
+
+function handleImageLoad(id: string) {
+  imageLoadStates[id] = true
+}
+
+function handleImageError(id: string) {
+  imageLoadStates[id] = true
+}
 
 const getCategoryIcon = (category: string) => {
   const icons: Record<string, string> = {
@@ -197,5 +213,8 @@ const formatDate = (dateString: string) => {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+img {
+  transition: opacity 0.3s ease-in-out;
 }
 </style>
