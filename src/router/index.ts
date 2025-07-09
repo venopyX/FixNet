@@ -29,7 +29,7 @@ const routes = [
     path: '/profile/:id',
     name: 'UserProfile',
     component: () => import('@/views/UserProfileView.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/reports',
