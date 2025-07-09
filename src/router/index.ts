@@ -41,6 +41,7 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: () => import('@/views/AuthView.vue'),
+    meta: { forceScrollTop: true },
   },
   {
     path: '/:pathMatch(.*)*',
@@ -53,10 +54,23 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
+    // Special handling for `root(/)` route and routes that need forced scroll
+    if (to.meta?.forceScrollTop || to.path === '/') {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          // Force immediate scroll for problematic routes
+          document.documentElement.scrollTop = 0
+          document.body.scrollTop = 0
+          resolve({ top: 0, left: 0, behavior: 'auto' })
+        }, 0)
+      })
+    }
+
     // If there's a saved position (browser back/forward), use it
     if (savedPosition) {
       return savedPosition
     }
+
     // For hash links, scroll to the element
     if (to.hash) {
       return {
@@ -64,8 +78,9 @@ const router = createRouter({
         behavior: 'smooth',
       }
     }
+
     // Default: scroll to top for new navigation
-    return { top: 0, behavior: 'smooth' }
+    return { top: 0, left: 0, behavior: 'smooth' }
   },
 })
 
