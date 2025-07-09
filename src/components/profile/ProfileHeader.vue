@@ -82,6 +82,7 @@
           <div class="flex items-center gap-3">
             <button
               v-if="isOwnProfile"
+              @click="openEditProfile"
               class="claybutton inline-flex items-center gap-2 border border-primary/20 text-primary bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-xl font-medium transition-all duration-200"
             >
               <svg
@@ -101,6 +102,7 @@
             </button>
 
             <button
+              @click="openShareProfile"
               class="claybutton inline-flex items-center gap-2 border border-border text-text-secondary bg-surface hover:bg-muted px-4 py-2 rounded-xl font-medium transition-all duration-200"
             >
               <svg
@@ -122,11 +124,25 @@
         </div>
       </div>
     </div>
+
+    <!-- Profile Edit Modal -->
+    <ProfileEditModal
+      :show="showEditModal"
+      :user="user"
+      @close="closeEditProfile"
+      @updated="handleProfileUpdate"
+    />
+
+    <!-- Share Profile Modal -->
+    <ShareProfileModal :show="showShareModal" :user="user" @close="closeShareProfile" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { User } from '@/data/mockData'
+import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
+import ShareProfileModal from '@/components/profile/ShareProfileModal.vue'
 
 interface Props {
   user: User
@@ -141,7 +157,33 @@ interface Props {
   isOwnProfile: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+// Modal state
+const showEditModal = ref(false)
+const showShareModal = ref(false)
+
+const openEditProfile = () => {
+  showEditModal.value = true
+}
+
+const closeEditProfile = () => {
+  showEditModal.value = false
+}
+
+const openShareProfile = () => {
+  showShareModal.value = true
+}
+
+const closeShareProfile = () => {
+  showShareModal.value = false
+}
+
+const handleProfileUpdate = () => {
+  // Profile updated successfully
+  // You might want to emit an event to parent to refresh data
+  closeEditProfile()
+}
 
 const getInitials = (firstName: string, lastName: string) => {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
