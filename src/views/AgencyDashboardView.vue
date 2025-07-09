@@ -63,6 +63,16 @@ import QuickActions from '@/components/agency/QuickActions.vue'
 import AgencyNotifications from '@/components/agency/AgencyNotifications.vue'
 import AssignedReportsTable from '@/components/agency/AssignedReportsTable.vue'
 
+interface AgencyNotification {
+  id: string
+  type: string
+  title: string
+  message: string
+  time: string
+  read: boolean
+  reportId: string
+}
+
 const router = useRouter()
 
 // Check agency staff access
@@ -157,8 +167,8 @@ const filteredReports = computed(() => {
 })
 
 // Generate agency notifications
-const agencyNotifications = computed(() => {
-  const notifications = []
+const agencyNotifications = computed((): AgencyNotification[] => {
+  const notifications: AgencyNotification[] = []
 
   // New reports notifications
   const newReports = assignedReports.value.filter((r) => r.status === 'pending').slice(0, 3)

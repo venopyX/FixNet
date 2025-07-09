@@ -6,7 +6,7 @@
         <div class="mb-6">
           <button
             @click="goBack"
-            class="claybutton inline-flex items-center gap-2 text-text-secondary bg-surface border border-border hover:bg-muted hover:text-text-primary hover:border-primary/30 px-4 py-2 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-border/30"
+            class="claybutton inline-flex items-center gap-2 text-text-secondary bg-surface border border-border hover:bg-muted hover:text-text-primary hover:border-primary/30 px-4 py-2 rounded-xl font-medium transition-all duration-200"
           >
             <svg
               class="w-5 h-5"
@@ -79,13 +79,13 @@
             <!-- Left Column - Stats & Badges -->
             <div class="space-y-6">
               <!-- Profile Stats -->
-              <ProfileStats :stats="userStats" />
+              <ProfileStats v-if="userStats" :stats="userStats" />
 
               <!-- Profile Badges -->
-              <ProfileBadges :badges="userBadges" :stats="userStats" />
+              <ProfileBadges v-if="userStats" :badges="userBadges" :stats="userStats" />
 
               <!-- Profile Contact (if enabled) -->
-              <ProfileContact v-if="user.contact_enabled" :user="user" />
+              <ProfileContact v-if="user.contact_enabled === true" :user="user" />
             </div>
 
             <!-- Right Column - Activity & Reports -->
@@ -119,6 +119,34 @@ interface Props {
   id: string
 }
 
+interface UserStats {
+  totalReports: number
+  resolved: number
+  pending: number
+  avgResponseTime: number
+  impactScore: number
+  joinDate: string
+}
+
+interface UserBadge {
+  id: string
+  name: string
+  description: string
+  icon: string
+  color: string
+}
+
+interface UserActivity {
+  id: string
+  type: string
+  title: string
+  description: string
+  date: string
+  icon: string
+  color: string
+  link: string
+}
+
 const props = defineProps<Props>()
 const router = useRouter()
 
@@ -133,7 +161,7 @@ const isOwnProfile = computed(() => {
 })
 
 // Calculate user stats
-const userStats = computed(() => {
+const userStats = computed((): UserStats | null => {
   if (!user.value) return null
 
   const reports = mockReports.filter((r) => r.resident_id === user.value!.id)
@@ -173,10 +201,10 @@ const userReports = computed(() => {
 })
 
 // Calculate user badges based on achievements
-const userBadges = computed(() => {
+const userBadges = computed((): UserBadge[] => {
   if (!userStats.value) return []
 
-  const badges = []
+  const badges: UserBadge[] = []
 
   // New Member Badge
   const joinDate = new Date(userStats.value.joinDate)
@@ -247,10 +275,10 @@ const userBadges = computed(() => {
 })
 
 // Get user activities (recent reports and status updates)
-const userActivities = computed(() => {
+const userActivities = computed((): UserActivity[] => {
   if (!user.value) return []
 
-  const activities = []
+  const activities: UserActivity[] = []
 
   // Add recent reports
   const recentReports = userReports.value.slice(0, 5)
