@@ -146,6 +146,22 @@ const hasActiveFilters = computed(() => {
   )
 })
 
+// Helper function for safe comparison
+const safeCompare = (a: any, b: any, sortOrder: 'asc' | 'desc'): number => {
+  // Handle null/undefined values
+  if (a == null && b == null) return 0
+  if (a == null) return sortOrder === 'asc' ? -1 : 1
+  if (b == null) return sortOrder === 'asc' ? 1 : -1
+
+  // Convert to strings for comparison if needed
+  const aVal = typeof a === 'string' ? a : String(a)
+  const bVal = typeof b === 'string' ? b : String(b)
+
+  if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1
+  if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1
+  return 0
+}
+
 // Filter users
 const filteredUsers = computed(() => {
   let users = [...mockUsers]
@@ -197,14 +213,11 @@ const filteredUsers = computed(() => {
     users = users.filter((user) => new Date(user.created_at) >= filterDate)
   }
 
-  // Apply sorting
+  // Apply sorting with null-safe comparison
   users.sort((a, b) => {
     const aValue = a[sortBy.value]
     const bValue = b[sortBy.value]
-
-    if (aValue < bValue) return sortOrder.value === 'asc' ? -1 : 1
-    if (aValue > bValue) return sortOrder.value === 'asc' ? 1 : -1
-    return 0
+    return safeCompare(aValue, bValue, sortOrder.value)
   })
 
   return users

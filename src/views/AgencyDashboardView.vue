@@ -111,6 +111,22 @@ const agencyStats = computed(() => {
   }
 })
 
+// Helper function for safe comparison
+const safeCompare = (a: any, b: any, sortOrder: 'asc' | 'desc'): number => {
+  // Handle null/undefined values
+  if (a == null && b == null) return 0
+  if (a == null) return sortOrder === 'asc' ? -1 : 1
+  if (b == null) return sortOrder === 'asc' ? 1 : -1
+
+  // Convert to strings for comparison if needed
+  const aVal = typeof a === 'string' ? a : String(a)
+  const bVal = typeof b === 'string' ? b : String(b)
+
+  if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1
+  if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1
+  return 0
+}
+
 // Apply filters to assigned reports
 const filteredReports = computed(() => {
   let reports = [...assignedReports.value]
@@ -130,14 +146,11 @@ const filteredReports = computed(() => {
     reports = reports.filter((report) => report.priority === selectedPriority.value)
   }
 
-  // Apply sorting
+  // Apply sorting with null-safe comparison
   reports.sort((a, b) => {
     const aValue = a[sortBy.value]
     const bValue = b[sortBy.value]
-
-    if (aValue < bValue) return sortOrder.value === 'asc' ? -1 : 1
-    if (aValue > bValue) return sortOrder.value === 'asc' ? 1 : -1
-    return 0
+    return safeCompare(aValue, bValue, sortOrder.value)
   })
 
   return reports
@@ -242,6 +255,7 @@ const updateReportStatus = (reportId: string, newStatus: Report['status']) => {
       new_status: newStatus,
       admin_comment: `Status updated by ${currentUser.value?.first_name} ${currentUser.value?.last_name}`,
       updated_by: `${currentUser.value?.first_name} ${currentUser.value?.last_name}`,
+      is_public: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })

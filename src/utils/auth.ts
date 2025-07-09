@@ -53,13 +53,16 @@ export const authService = {
       return { success: false, error: 'Email already registered' }
     }
 
-    // Create new user
+    // Create new user with all required properties
     const newUser: User = {
       id: String(mockUsers.length + 1),
       first_name: userData.first_name,
       last_name: userData.last_name,
       email: userData.email,
+      password: 'hashedpassword', // In real app, this would be properly hashed
       role: 'resident',
+      status: 'active', // Default status for new users
+      contact_enabled: true, // Default to enabled
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }

@@ -177,14 +177,13 @@ interface Emits {
   viewReport: [reportId: string]
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 defineEmits<Emits>()
 
 const viewMode = ref<'recent' | 'resolved'>('recent')
 const displayLimit = ref(5)
 
 const filteredReports = computed(() => {
-  const props = getCurrentInstance()?.props as Props
   if (viewMode.value === 'resolved') {
     return props.reports.filter((r) => r.status === 'resolved')
   }
@@ -218,9 +217,6 @@ const formatDate = (dateString: string) => {
     year: 'numeric',
   })
 }
-
-// Fix for Composition API
-import { getCurrentInstance } from 'vue'
 </script>
 
 <style scoped>
