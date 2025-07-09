@@ -126,11 +126,11 @@
                 <div
                   class="bg-muted rounded-2xl h-32 mb-4 flex items-center justify-center overflow-hidden"
                 >
-                  <div
-                    class="w-full h-full bg-gradient-to-br from-success/10 to-info/10 flex items-center justify-center"
-                  >
-                    <span class="text-text-muted text-sm">Before & After Photos</span>
-                  </div>
+                  <img
+                    src="https://www.mnroadways.com/wp-content/uploads/2016/04/Infrared-Thermal-Patching-Before.jpg"
+                    alt="Pothole before and after repair"
+                    class="w-full h-full object-cover"
+                  />
                 </div>
 
                 <div class="flex items-center justify-between">
