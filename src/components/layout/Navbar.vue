@@ -18,6 +18,16 @@
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-2">
+          <router-link
+            to="/reports"
+            class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
+            :class="{ 'text-primary bg-primary/10': $route.path === '/reports' }"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Browse Reports
+          </router-link>
           <a
             href="/#how-it-works"
             class="claybutton inline-flex items-center gap-2 text-text-secondary font-medium px-4 py-2 rounded-xl hover:text-primary hover:bg-primary/5 transition-all duration-200"
@@ -180,6 +190,17 @@
           >
             <!-- Navigation Links -->
             <div class="space-y-2 mb-4">
+              <router-link
+                to="/reports"
+                class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
+                :class="{ 'bg-primary/10 text-primary': $route.path === '/reports' }"
+                @click="closeMobileMenu"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span class="font-medium">Browse Reports</span>
+              </router-link>
               <a
                 href="/#how-it-works"
                 class="claybutton flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:bg-primary/5 hover:text-primary transition-all duration-200 w-full"
