@@ -258,7 +258,7 @@
 
         <div class="text-center">
           <router-link
-            to="/auth"
+            to="/reports"
             class="claybutton inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-2xl font-medium hover:scale-105 transition-all duration-200"
           >
             View All Reports
