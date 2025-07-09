@@ -76,7 +76,7 @@
             Sign In
           </router-link>
           <router-link
-            to="/auth"
+            to="/auth#sign-up"
             class="claybutton inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-5 py-2 rounded-xl font-medium shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-0 focus:outline-none focus:ring-2 focus:ring-primary/30"
           >
             <svg
@@ -245,7 +245,7 @@
                 <span>Sign In</span>
               </router-link>
               <router-link
-                to="/auth"
+                to="/auth#sign-up"
                 class="claybutton flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-medium shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >

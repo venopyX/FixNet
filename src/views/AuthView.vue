@@ -30,12 +30,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, watch } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import LoginForm from '@/components/auth/LoginForm.vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm.vue'
 
+const router = useRouter()
 const mode = ref<'login' | 'signup' | 'reset'>('login')
+
+// Hash to mode mapping with aliases
+const hashToModeMap: Record<string, 'login' | 'signup' | 'reset'> = {
+  'sign-in': 'login',
+  login: 'login',
+  'sign-up': 'signup',
+  signup: 'signup',
+  register: 'signup',
+  'reset-password': 'reset',
+  reset: 'reset',
+  'forgot-password': 'reset',
+}
+
+// Mode to hash mapping (preferred hash for each mode)
+const modeToHashMap: Record<'login' | 'signup' | 'reset', string> = {
+  login: 'sign-in',
+  signup: 'sign-up',
+  reset: 'reset-password',
+}
 
 const currentComponent = computed(() => {
   switch (mode.value) {
@@ -77,8 +98,22 @@ const forceScrollToTop = () => {
   }, 100)
 }
 
+const getModeFromHash = (): 'login' | 'signup' | 'reset' => {
+  const hash = window.location.hash.slice(1) // Remove the # symbol
+  return hashToModeMap[hash] || 'login'
+}
+
+const updateHashFromMode = (newMode: 'login' | 'signup' | 'reset') => {
+  const newHash = modeToHashMap[newMode]
+  // Only update if different to avoid triggering hashchange event unnecessarily
+  if (window.location.hash !== `#${newHash}`) {
+    window.location.hash = newHash
+  }
+}
+
 const switchMode = (newMode: 'login' | 'signup') => {
   mode.value = newMode
+  updateHashFromMode(newMode)
   nextTick(() => {
     forceScrollToTop()
   })
@@ -86,13 +121,41 @@ const switchMode = (newMode: 'login' | 'signup') => {
 
 const handleModeSwitch = (newMode: 'login' | 'signup' | 'reset') => {
   mode.value = newMode
+  updateHashFromMode(newMode)
   nextTick(() => {
     forceScrollToTop()
   })
 }
 
+const handleHashChange = () => {
+  const newMode = getModeFromHash()
+  if (newMode !== mode.value) {
+    mode.value = newMode
+    nextTick(() => {
+      forceScrollToTop()
+    })
+  }
+}
+
 onMounted(() => {
+  // Set initial mode based on hash
+  const initialMode = getModeFromHash()
+  mode.value = initialMode
+
+  // If no hash is present, set default hash
+  if (!window.location.hash) {
+    updateHashFromMode(initialMode)
+  }
+
+  // Listen for hash changes (browser navigation)
+  window.addEventListener('hashchange', handleHashChange)
+
   forceScrollToTop()
+})
+
+onUnmounted(() => {
+  // Clean up event listener
+  window.removeEventListener('hashchange', handleHashChange)
 })
 
 // Watch for mode changes and ensure scroll to top
