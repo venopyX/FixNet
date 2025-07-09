@@ -52,6 +52,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // If there's a saved position (browser back/forward), use it
+    if (savedPosition) {
+      return savedPosition
+    }
+    // For hash links, scroll to the element
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    // Default: scroll to top for new navigation
+    return { top: 0, behavior: 'smooth' }
+  },
 })
 
 // Navigation guards
