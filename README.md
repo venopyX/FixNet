@@ -3,6 +3,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
@@ -483,6 +484,7 @@ This project was developed as part of the **ALX Software Engineering Specializat
 - **ALX Africa** - For the comprehensive software engineering program
 - **Vue.js Team** - For the excellent frontend framework
 - **Supabase** - For providing powerful backend infrastructure
+- **TailwindCSS** - For providing useful UIUX design framework
 - **Open Source Community** - For the tools and libraries that made this possible
 - **Contributors** - Thank you to everyone who helps improve FixNet
 
