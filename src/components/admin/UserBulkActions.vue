@@ -168,9 +168,14 @@ const handleAction = (actionType: string) => {
   closeDropdown()
 }
 
-// Click outside directive
+// Extended HTMLElement interface for the click outside directive
+interface HTMLElementWithClickOutside extends HTMLElement {
+  clickOutsideEvent?: (event: Event) => void
+}
+
+// Click outside directive with proper typing
 const vClickOutside = {
-  beforeMount(el: HTMLElement, binding: any) {
+  beforeMount(el: HTMLElementWithClickOutside, binding: any) {
     el.clickOutsideEvent = (event: Event) => {
       if (!(el === event.target || el.contains(event.target as Node))) {
         binding.value()
@@ -178,8 +183,10 @@ const vClickOutside = {
     }
     document.addEventListener('click', el.clickOutsideEvent)
   },
-  unmounted(el: HTMLElement) {
-    document.removeEventListener('click', el.clickOutsideEvent)
+  unmounted(el: HTMLElementWithClickOutside) {
+    if (el.clickOutsideEvent) {
+      document.removeEventListener('click', el.clickOutsideEvent)
+    }
   },
 }
 </script>

@@ -65,6 +65,23 @@
                   />
                 </div>
 
+                <!-- Public Update Checkbox -->
+                <div class="space-y-3">
+                  <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      v-model="form.isPublic"
+                      class="w-4 h-4 text-primary bg-background border-border rounded focus:ring-primary focus:ring-2"
+                    />
+                    <span class="text-sm font-medium text-text-secondary">
+                      Make this update visible to the public
+                    </span>
+                  </label>
+                  <p class="text-xs text-text-muted ml-7">
+                    Public updates will be visible in the report's status history
+                  </p>
+                </div>
+
                 <!-- Error Display -->
                 <div
                   v-if="submitError"
@@ -128,7 +145,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
-import { type Report, mockStatusUpdates, mockUsers } from '@/data/mockData'
+import { type Report, type StatusUpdate, mockStatusUpdates, mockUsers } from '@/data/mockData'
 import { currentUser } from '@/utils/auth'
 import ReportSummary from './ReportSummary.vue'
 import StatusSelect from './StatusSelect.vue'
@@ -151,6 +168,7 @@ const emit = defineEmits<Emits>()
 const form = reactive({
   newStatus: 'pending' as Report['status'],
   adminComment: '',
+  isPublic: true,
 })
 
 const errors = reactive({
@@ -168,6 +186,7 @@ watch(
     if (show && props.report) {
       form.newStatus = props.report.status
       form.adminComment = ''
+      form.isPublic = true
       Object.keys(errors).forEach((key) => {
         errors[key as keyof typeof errors] = ''
       })
@@ -214,8 +233,8 @@ const handleSubmit = async () => {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Create status update
-    const statusUpdate = {
+    // Create status update with proper typing
+    const statusUpdate: StatusUpdate = {
       id: String(mockStatusUpdates.length + 1),
       report_id: props.report.id,
       admin_id: currentUser.value?.id,
@@ -223,6 +242,7 @@ const handleSubmit = async () => {
       new_status: form.newStatus,
       admin_comment: form.adminComment,
       updated_by: `${currentUser.value?.first_name} ${currentUser.value?.last_name}`,
+      is_public: form.isPublic,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }
