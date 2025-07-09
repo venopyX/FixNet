@@ -85,7 +85,7 @@
               <ProfileBadges v-if="userStats" :badges="userBadges" :stats="userStats" />
 
               <!-- Profile Contact (if enabled) -->
-              <ProfileContact v-if="user.contact_enabled === true" :user="user" />
+              <ProfileContact v-if="isContactEnabled" :user="user" />
             </div>
 
             <!-- Right Column - Activity & Reports -->
@@ -156,8 +156,13 @@ const user = computed(() => {
 })
 
 // Check if viewing own profile
-const isOwnProfile = computed(() => {
-  return currentUser.value && user.value && currentUser.value.id === user.value.id
+const isOwnProfile = computed((): boolean => {
+  return Boolean(currentUser.value && user.value && currentUser.value.id === user.value.id)
+})
+
+// Check if contact is enabled (handle undefined/null values)
+const isContactEnabled = computed((): boolean => {
+  return Boolean(user.value?.contact_enabled)
 })
 
 // Calculate user stats
