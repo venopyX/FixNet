@@ -212,21 +212,42 @@
               <StatusBadge :status="report.status" class="ml-4" />
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 relative">
+              <!-- Loading placeholder -->
               <div
-                v-if="!imageLoaded && report.photo_url"
-                class="w-full h-32 bg-gradient-to-br from-muted to-border rounded-2xl flex items-center justify-center"
+                v-if="report.photo_url && !isImageLoaded(report.id)"
+                class="w-full h-32 bg-gradient-to-br from-muted to-border rounded-2xl flex items-center justify-center absolute inset-0 z-10"
               >
-                <span class="text-text-muted text-sm">📸 Photo Available</span>
+                <div class="flex items-center gap-2 text-text-muted">
+                  <div
+                    class="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
+                  ></div>
+                  <span class="text-sm">Loading image...</span>
+                </div>
               </div>
+
+              <!-- Actual image -->
               <img
                 v-if="report.photo_url"
-                v-show="imageLoaded"
                 :src="report.photo_url"
+                :alt="`Image for ${report.title}`"
                 loading="lazy"
-                class="w-full h-32 object-cover rounded-2xl"
-                @load="imageLoaded = true"
+                class="w-full h-32 object-cover rounded-2xl transition-opacity duration-300"
+                :class="{
+                  'opacity-100': isImageLoaded(report.id),
+                  'opacity-0': !isImageLoaded(report.id),
+                }"
+                @load="handleImageLoad(report.id)"
+                @error="handleImageError(report.id)"
               />
+
+              <!-- Fallback for reports without images -->
+              <div
+                v-if="!report.photo_url"
+                class="w-full h-32 bg-gradient-to-br from-muted to-border rounded-2xl flex items-center justify-center"
+              >
+                <span class="text-text-muted text-sm">📄 No image available</span>
+              </div>
             </div>
 
             <div class="flex items-center justify-between text-xs text-text-muted">
@@ -730,14 +751,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type Ref } from 'vue'
+import { ref, computed, reactive, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { mockReports, type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
 const router = useRouter()
 const howItWorks: Ref<HTMLElement | null> = ref(null)
-const imageLoaded = ref(false)
+
+// Track image load states for each report individually
+const imageLoadStates = reactive<Record<string, boolean>>({})
 
 // Recent reports (show first 6)
 const recentReports = computed(() => mockReports.slice(0, 6))
@@ -756,6 +779,22 @@ const stats = computed(() => {
     responseTime,
   }
 })
+
+// Check if image is loaded for a specific report
+const isImageLoaded = (reportId: string): boolean => {
+  return imageLoadStates[reportId] === true
+}
+
+// Handle individual image loading
+const handleImageLoad = (reportId: string) => {
+  imageLoadStates[reportId] = true
+}
+
+// Handle image loading errors
+const handleImageError = (reportId: string) => {
+  console.warn(`Failed to load image for report ${reportId}`)
+  imageLoadStates[reportId] = true // Show broken image instead of loading state
+}
 
 const scrollToHow = () => {
   if (howItWorks.value) {
@@ -799,5 +838,21 @@ const getCategoryLabel = (category: string) => {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Smooth image transitions */
+img {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 </style>
