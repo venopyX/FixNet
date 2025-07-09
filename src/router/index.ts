@@ -71,12 +71,23 @@ const router = createRouter({
       return savedPosition
     }
 
-    // For hash links, scroll to the element
+    // For hash links to actual elements, scroll to the element
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-      }
+      return new Promise((resolve) => {
+        // Wait a bit for the page to render
+        setTimeout(() => {
+          const element = document.querySelector(to.hash)
+          if (element) {
+            resolve({
+              el: to.hash,
+              behavior: 'smooth',
+            })
+          } else {
+            // Element not found, just scroll to top
+            resolve({ top: 0, left: 0, behavior: 'smooth' })
+          }
+        }, 100)
+      })
     }
 
     // Default: scroll to top for new navigation
