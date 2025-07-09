@@ -4,7 +4,7 @@
     <td class="px-6 py-4">
       <div class="flex items-start gap-3">
         <div
-          v-if="report.photo_url && !imageLoaded"
+          v-if="report.photo_url && !isImageLoaded(report.id)"
           class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
         >
           <svg
@@ -28,12 +28,16 @@
         </div>
         <img
           v-if="report.photo_url"
-          v-show="imageLoaded"
           :src="report.photo_url"
           loading="lazy"
-          class="w-12 h-12 object-cover rounded-lg flex-shrink-0"
-          @load="imageLoaded = true"
-          @error="imageLoaded = true"
+          class="w-12 h-12 object-cover rounded-lg flex-shrink-0 transition-opacity duration-300"
+          :class="{
+            'opacity-100': isImageLoaded(report.id),
+            'opacity-0': !isImageLoaded(report.id),
+          }"
+          @load="handleImageLoad(report.id)"
+          @error="handleImageError(report.id)"
+          alt="Report photo"
         />
         <div class="min-w-0 flex-1">
           <h4 class="font-medium text-text-primary truncate">{{ report.title }}</h4>
@@ -132,7 +136,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { type Report } from '@/data/mockData'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
@@ -148,7 +152,18 @@ interface Emits {
 defineProps<Props>()
 defineEmits<Emits>()
 
-const imageLoaded = ref(false) // Reactive state for image loading
+// Use a reactive object for per-row image loading state (to support multiple rows)
+const imageLoadStates = reactive<Record<string, boolean>>({})
+
+const isImageLoaded = (id: string) => imageLoadStates[id] === true
+
+function handleImageLoad(id: string) {
+  imageLoadStates[id] = true
+}
+
+function handleImageError(id: string) {
+  imageLoadStates[id] = true
+}
 
 const getCategoryIcon = (category: string) => {
   const icons: Record<string, string> = {
@@ -177,3 +192,9 @@ const formatTime = (dateString: string) => {
   })
 }
 </script>
+
+<style scoped>
+img {
+  transition: opacity 0.3s ease-in-out;
+}
+</style>
