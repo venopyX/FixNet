@@ -9,7 +9,7 @@
             >
               <span class="text-white font-bold text-lg">FA</span>
             </div>
-            <span class="font-bold text-2xl text-white">FixMyArea</span>
+            <span class="font-bold text-2xl text-white">FixNet</span>
           </div>
           <p class="text-white/70 mb-6 max-w-md leading-relaxed">
             Empowering communities to create positive change through transparent, efficient
@@ -274,7 +274,7 @@
         class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
       >
         <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-white/50">
-          <p>&copy; 2025 FixMyArea. All rights reserved.</p>
+          <p>&copy; 2025 FixNet. All rights reserved.</p>
           <div class="flex items-center gap-2">
             <span>Built with</span>
             <svg class="w-4 h-4 text-error" fill="currentColor" viewBox="0 0 20 20">

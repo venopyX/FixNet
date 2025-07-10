@@ -11,7 +11,7 @@
             >
               <span class="text-white font-bold text-sm">FA</span>
             </div>
-            <span class="font-bold text-xl text-text-primary">FixMyArea</span>
+            <span class="font-bold text-xl text-text-primary">FixNet</span>
           </router-link>
         </div>
 

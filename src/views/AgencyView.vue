@@ -37,7 +37,7 @@
               </span>
               <br />
               <span class="text-3xl lg:text-5xl text-text-secondary font-medium">
-                With FixMyArea
+                With FixNet
               </span>
             </h1>
 
@@ -191,7 +191,7 @@
           </div>
           <h2 class="text-4xl font-bold text-text-primary mb-4">Agencies See Real Impact</h2>
           <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-            Join municipalities that have transformed their citizen services with FixMyArea
+            Join municipalities that have transformed their citizen services with FixNet
           </p>
         </div>
 
@@ -317,7 +317,7 @@
             <span
               class="claycard bg-gradient-to-r from-primary/10 to-accent/10 text-primary px-4 py-2 rounded-full text-sm font-medium"
             >
-              ⚡ Why Choose FixMyArea
+              ⚡ Why Choose FixNet
             </span>
           </div>
           <h2 class="text-4xl font-bold text-text-primary mb-4">Benefits for Your Agency</h2>
@@ -617,7 +617,7 @@
               </div>
             </div>
             <p class="text-text-primary leading-relaxed mb-4">
-              "FixMyArea has revolutionized how we handle citizen reports. Our response time
+              "FixNet has revolutionized how we handle citizen reports. Our response time
               improved by 60% and citizen satisfaction is at an all-time high."
             </p>
             <div class="flex items-center gap-1">
@@ -673,7 +673,7 @@
               </div>
             </div>
             <p class="text-text-primary leading-relaxed mb-4">
-              "The transparency FixMyArea provides has significantly improved our relationship with
+              "The transparency FixNet provides has significantly improved our relationship with
               citizens. They can see we're working on their concerns."
             </p>
             <div class="flex items-center gap-1">
@@ -710,7 +710,7 @@
             Ready to Transform Your Citizen Services?
           </h2>
           <p class="text-xl mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
-            Join the growing network of agencies using FixMyArea to build stronger communities. Get
+            Join the growing network of agencies using FixNet to build stronger communities. Get
             started today with a free consultation.
           </p>
 
@@ -844,7 +844,7 @@
                 </svg>
               </div>
               <h4 class="font-semibold text-white mb-2">Email Us</h4>
-              <p class="text-white/80 text-sm">partnerships@fixmyarea.com</p>
+              <p class="text-white/80 text-sm">partnerships@fixnet.com</p>
             </div>
 
             <div class="claycard bg-white/10 backdrop-blur-sm p-6 rounded-2xl">

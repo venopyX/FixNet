@@ -255,7 +255,7 @@ const copyUrl = async () => {
 const shareVia = (platform: string) => {
   if (!props.user) return
 
-  const text = `Check out ${props.user.first_name} ${props.user.last_name}'s community profile on FixMyArea!`
+  const text = `Check out ${props.user.first_name} ${props.user.last_name}'s community profile on FixNet!`
   const url = profileUrl.value
 
   let shareUrl = ''
@@ -286,8 +286,8 @@ const nativeShare = async () => {
 
   try {
     await navigator.share({
-      title: `${props.user.first_name} ${props.user.last_name} - FixMyArea Profile`,
-      text: `Check out ${props.user.first_name} ${props.user.last_name}'s community profile on FixMyArea!`,
+      title: `${props.user.first_name} ${props.user.last_name} - FixNet Profile`,
+      text: `Check out ${props.user.first_name} ${props.user.last_name}'s community profile on FixNet!`,
       url: profileUrl.value,
     })
     showShareSuccess('Profile shared successfully!')
