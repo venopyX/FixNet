@@ -297,7 +297,8 @@
 
                     <div class="border-t border-border/50 mt-2 pt-2">
                       <button
-                        @click="handleLogout"
+                        v-if="isAuthenticated"
+                        @click="showConfirm = true"
                         class="claybutton flex items-center gap-3 w-full px-3 py-2 rounded-xl text-error hover:bg-error/5 transition-all duration-200"
                       >
                         <svg
@@ -561,7 +562,8 @@
 
               <!-- Sign Out Button -->
               <button
-                @click="handleLogout"
+                v-if="isAuthenticated"
+                @click="showConfirm = true"
                 class="claybutton flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-border text-text-secondary bg-surface font-medium hover:bg-muted hover:text-text-primary transition-all duration-200 w-full"
               >
                 <svg
@@ -584,6 +586,63 @@
         </div>
       </Transition>
     </div>
+
+    <!-- Logout Confirmation Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="showConfirm" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <!-- Backdrop -->
+          <div
+            class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            @click="showConfirm = false"
+          ></div>
+
+          <!-- Modal -->
+          <div class="claycard bg-surface rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl">
+            <div class="text-center">
+              <div
+                class="w-16 h-16 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-warning"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-xl font-bold text-text-primary mb-2">Sign Out Confirmation</h3>
+
+              <p class="text-text-secondary mb-6">
+                Are you sure you want to sign out of your FixNet account?
+              </p>
+
+              <div class="flex gap-3">
+                <button
+                  @click="showConfirm = false"
+                  class="claybutton flex-1 px-4 py-3 border border-border text-text-secondary bg-surface rounded-2xl font-medium hover:bg-muted transition-all duration-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  @click="handleLogout"
+                  class="claybutton flex-1 px-4 py-3 bg-error text-white rounded-2xl font-medium hover:bg-error/90 transition-all duration-200"
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
 
     <!-- Profile Edit Modal -->
     <ProfileEditModal
@@ -609,6 +668,7 @@ const showMobileMenu = ref(false)
 const showProfileMenu = ref(false)
 const showEditModal = ref(false)
 const showShareModal = ref(false)
+const showConfirm = ref(false)
 const router = useRouter()
 const route = useRoute()
 
@@ -634,7 +694,6 @@ const closeProfileMenu = () => {
   showProfileMenu.value = false
 }
 
-// Fix: Add proper role-based dashboard routing
 const getDashboardRoute = () => {
   if (!currentUser.value) return '/dashboard'
 
@@ -661,6 +720,7 @@ const handleLogoClick = () => {
 
 const handleLogout = () => {
   authService.logout()
+  showConfirm.value = false
   router.push('/')
   closeMobileMenu()
   closeProfileMenu()
