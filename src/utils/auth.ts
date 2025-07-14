@@ -1,41 +1,37 @@
 import { ref } from 'vue'
-import { mockUsers, type User } from '@/data/mockData'
+import { apiService } from '@/services/api'
+import { supabase } from '@/lib/supabase'
+import type { User } from '@/types/database'
 
-// Mock authentication state
+// Authentication state
 export const currentUser = ref<User | null>(null)
 export const isAuthenticated = ref(false)
+export const isLoading = ref(false)
 
-// Mock authentication functions
+// Enhanced authentication service
 export const authService = {
   async login(
     email: string,
     password: string,
   ): Promise<{ success: boolean; user?: User; error?: string }> {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 800))
+    isLoading.value = true
 
-    // Find user by email
-    const user = mockUsers.find((u) => u.email === email)
+    try {
+      const response = await apiService.signIn(email, password)
 
-    if (!user) {
-      return { success: false, error: 'User not found' }
+      if (response.error) {
+        return { success: false, error: response.error }
+      }
+
+      currentUser.value = response.data!
+      isAuthenticated.value = true
+
+      return { success: true, user: response.data }
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Login failed' }
+    } finally {
+      isLoading.value = false
     }
-
-    // In real app, you'd check hashed password
-    // For demo purposes, any password works except 'wrong'
-    if (password === 'wrong') {
-      return { success: false, error: 'Invalid password' }
-    }
-
-    // Set authenticated state
-    currentUser.value = user
-    isAuthenticated.value = true
-
-    // Store in localStorage for persistence
-    localStorage.setItem('fixnet_user', JSON.stringify(user))
-    localStorage.setItem('fixnet_authenticated', 'true')
-
-    return { success: true, user }
   },
 
   async register(userData: {
@@ -43,80 +39,137 @@ export const authService = {
     last_name: string
     email: string
     password: string
+    role?: 'resident' | 'agency_staff' | 'admin' | 'super_admin'
   }): Promise<{ success: boolean; user?: User; error?: string }> {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    isLoading.value = true
 
-    // Check if user already exists
-    const existingUser = mockUsers.find((u) => u.email === userData.email)
-    if (existingUser) {
-      return { success: false, error: 'Email already registered' }
+    try {
+      const response = await apiService.signUp(userData.email, userData.password, {
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        role: userData.role || 'resident',
+      })
+
+      if (response.error) {
+        return { success: false, error: response.error }
+      }
+
+      // Note: User will need to verify email before they can sign in
+      return { success: true, user: response.data }
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Registration failed' }
+    } finally {
+      isLoading.value = false
     }
-
-    // Create new user with all required properties
-    const newUser: User = {
-      id: String(mockUsers.length + 1),
-      first_name: userData.first_name,
-      last_name: userData.last_name,
-      email: userData.email,
-      password: 'hashedpassword', // In real app, this would be properly hashed
-      role: 'resident',
-      status: 'active', // Default status for new users
-      contact_enabled: true, // Default to enabled
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    }
-
-    // Add to mock users array
-    mockUsers.push(newUser)
-
-    // Set authenticated state
-    currentUser.value = newUser
-    isAuthenticated.value = true
-
-    // Store in localStorage
-    localStorage.setItem('fixnet_user', JSON.stringify(newUser))
-    localStorage.setItem('fixnet_authenticated', 'true')
-
-    return { success: true, user: newUser }
   },
 
   async forgotPassword(email: string): Promise<{ success: boolean; error?: string }> {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 600))
+    isLoading.value = true
 
-    // Check if user exists
-    const user = mockUsers.find((u) => u.email === email)
-    if (!user) {
-      return { success: false, error: 'Email not found' }
+    try {
+      const response = await apiService.resetPassword(email)
+
+      if (response.error) {
+        return { success: false, error: response.error }
+      }
+
+      return { success: true }
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Password reset failed' }
+    } finally {
+      isLoading.value = false
     }
-
-    // In real app, send reset email
-    console.log(`Password reset email sent to ${email}`)
-
-    return { success: true }
   },
 
-  logout() {
-    currentUser.value = null
-    isAuthenticated.value = false
-    localStorage.removeItem('fixnet_user')
-    localStorage.removeItem('fixnet_authenticated')
+  async logout(): Promise<void> {
+    try {
+      await apiService.signOut()
+    } finally {
+      currentUser.value = null
+      isAuthenticated.value = false
+    }
   },
 
-  // Check for existing session on app load
-  initializeAuth() {
-    const storedUser = localStorage.getItem('fixnet_user')
-    const storedAuth = localStorage.getItem('fixnet_authenticated')
-
-    if (storedUser && storedAuth === 'true') {
-      currentUser.value = JSON.parse(storedUser)
-      isAuthenticated.value = true
+  async getCurrentUser(): Promise<User | null> {
+    if (currentUser.value) {
+      return currentUser.value
     }
+
+    try {
+      const response = await apiService.getCurrentUser()
+
+      if (response.data) {
+        currentUser.value = response.data
+        isAuthenticated.value = true
+        return response.data
+      }
+    } catch (error) {
+      console.error('Failed to get current user:', error)
+    }
+
+    return null
+  },
+
+  async initializeAuth(): Promise<void> {
+    isLoading.value = true
+
+    try {
+      // Listen for auth state changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          const user = await this.getCurrentUser()
+          if (user) {
+            currentUser.value = user
+            isAuthenticated.value = true
+          }
+        } else if (event === 'SIGNED_OUT') {
+          currentUser.value = null
+          isAuthenticated.value = false
+        }
+      })
+
+      // Check for existing session
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      if (session) {
+        const user = await this.getCurrentUser()
+        if (user) {
+          currentUser.value = user
+          isAuthenticated.value = true
+        }
+      }
+    } catch (error) {
+      console.error('Failed to initialize auth:', error)
+    } finally {
+      isLoading.value = false
+    }
+  },
+
+  // Utility methods
+  hasRole(role: string): boolean {
+    return currentUser.value?.role === role
+  },
+
+  hasAnyRole(roles: string[]): boolean {
+    return roles.includes(currentUser.value?.role || '')
+  },
+
+  isAdmin(): boolean {
+    return this.hasAnyRole(['admin', 'super_admin'])
+  },
+
+  isAgencyStaff(): boolean {
+    return this.hasRole('agency_staff')
+  },
+
+  isSuperAdmin(): boolean {
+    return this.hasRole('super_admin')
   },
 }
 
-// Demo credentials for easy testing
+// Demo credentials for testing
 export const demoCredentials = {
   resident: {
     email: 'john@example.com',
@@ -125,5 +178,13 @@ export const demoCredentials = {
   admin: {
     email: 'admin@fixnet.com',
     password: 'admin123',
+  },
+  agencyStaff: {
+    email: 'staff@agency.com',
+    password: 'staff123',
+  },
+  superAdmin: {
+    email: 'super@fixnet.com',
+    password: 'super123',
   },
 }
