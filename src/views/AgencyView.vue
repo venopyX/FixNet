@@ -617,8 +617,8 @@
               </div>
             </div>
             <p class="text-text-primary leading-relaxed mb-4">
-              "FixNet has revolutionized how we handle citizen reports. Our response time
-              improved by 60% and citizen satisfaction is at an all-time high."
+              "FixNet has revolutionized how we handle citizen reports. Our response time improved
+              by 60% and citizen satisfaction is at an all-time high."
             </p>
             <div class="flex items-center gap-1">
               <svg class="w-5 h-5 text-warning fill-current" viewBox="0 0 20 20">

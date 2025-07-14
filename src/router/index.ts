@@ -1,8 +1,45 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import { isAuthenticated, currentUser } from '@/utils/auth'
 
-const routes = [
+// Define role types for type safety
+type UserRole = 'super_admin' | 'admin' | 'agency_staff' | 'resident'
+
+// Extend the RouteMeta interface to include our custom properties
+declare module 'vue-router' {
+  interface RouteMeta {
+    requiresAuth?: boolean
+    role?: UserRole
+    forceScrollTop?: boolean
+  }
+}
+
+// Type-safe role hierarchy - defines which roles can access what
+const roleHierarchy: Record<UserRole, UserRole[]> = {
+  super_admin: ['super_admin', 'admin', 'agency_staff', 'resident'],
+  admin: ['admin', 'resident'],
+  agency_staff: ['agency_staff'],
+  resident: ['resident'],
+}
+
+/**
+ * Check if user has required role or higher in hierarchy
+ * @param userRole - Current user's role
+ * @param requiredRole - Role required for the route
+ * @returns boolean indicating if user has access
+ */
+function hasRequiredRole(userRole: string | undefined, requiredRole: UserRole): boolean {
+  if (!userRole) return false
+
+  // Check if userRole exists in our hierarchy
+  if (!(userRole in roleHierarchy)) return false
+
+  // Type-safe access with assertion
+  return roleHierarchy[userRole as UserRole]?.includes(requiredRole) ?? false
+}
+
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
@@ -120,16 +157,20 @@ const router = createRouter({
 
 // Navigation guards
 router.beforeEach((to, from, next) => {
+  // Check authentication first
   if (to.meta.requiresAuth && !isAuthenticated.value) {
     next('/auth')
     return
   }
 
-  if (to.meta.role && currentUser.value?.role !== to.meta.role) {
+  // Check role-based access with hierarchy support
+  if (to.meta.role && !hasRequiredRole(currentUser.value?.role, to.meta.role)) {
+    // Redirect to home if access denied
     next('/')
     return
   }
 
+  // Allow navigation
   next()
 })
 
