@@ -830,6 +830,7 @@ const getCategoryLabel = (category: string) => {
 <style scoped>
 .landing-page {
   overflow-x: hidden;
+  position: relative;
 }
 
 .line-clamp-2 {
