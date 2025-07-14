@@ -145,9 +145,11 @@ const handleLogin = async () => {
     const result = await authService.login(form.email, form.password)
 
     if (result.success && result.user) {
-      // Redirect based on user role
-      if (result.user.role === 'admin') {
+      // Redirect based on user role with admin hierarchy
+      if (['admin', 'super_admin'].includes(result.user.role)) {
         router.push('/admin')
+      } else if (result.user.role === 'agency_staff') {
+        router.push('/agency/dashboard')
       } else {
         router.push('/dashboard')
       }
