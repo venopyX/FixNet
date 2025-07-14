@@ -6,16 +6,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <router-link to="/" class="flex items-center space-x-3" @click.prevent="handleLogoClick">
-            <div
-              class="claycard w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center overflow-hidden"
-            >
-              <img
-                src="/logo.png"
-                alt="FixNet Logo"
-                class="w-full h-full object-contain"
-                loading="eager"
-              />
-            </div>
+            <Logo size="medium" loading="eager" fallback-text="FN" />
             <span class="font-bold text-xl text-text-primary">FixNet</span>
           </router-link>
         </div>
@@ -666,6 +657,7 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { isAuthenticated, currentUser, authService } from '@/utils/auth'
+import Logo from '@/components/shared/Logo.vue'
 import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
 import ShareProfileModal from '@/components/profile/ShareProfileModal.vue'
 

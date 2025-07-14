@@ -4,16 +4,7 @@
       <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
         <div class="md:col-span-2">
           <div class="flex items-center space-x-3 mb-6">
-            <div
-              class="claycard w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center overflow-hidden"
-            >
-              <img
-                src="/logo.png"
-                alt="FixNet Logo"
-                class="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
+            <Logo size="large" loading="lazy" fallback-text="FN" />
             <span class="font-bold text-2xl text-white">FixNet</span>
           </div>
           <p class="text-white/70 mb-6 max-w-md leading-relaxed">
@@ -306,6 +297,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Logo from '@/components/shared/Logo.vue'
 
 const currentUserLogin = ref('@venopyx')
 </script>
