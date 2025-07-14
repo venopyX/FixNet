@@ -38,16 +38,17 @@ import Footer from '@/components/layout/Footer.vue'
 .morphing-shape {
   position: absolute;
   border-radius: 50%;
-  filter: blur(50px);
+  filter: blur(24px);
   opacity: 0.2;
   will-change: transform, border-radius;
 }
 
-/* Respect user preference for reduced motion */
-@media (prefers-reduced-motion: reduce) {
+/* Respect user preference for reduced motion and effects */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-transparency: reduce) {
   .morphing-shape {
     animation: none !important;
     transform: none !important;
+    filter: blur(8px) !important;
   }
 }
 
