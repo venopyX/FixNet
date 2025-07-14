@@ -69,8 +69,9 @@
         </div>
 
         <!-- Actions -->
-        <div v-if="isOwner" class="flex items-center gap-3">
+        <div v-if="isOwner || isAdmin" class="flex items-center gap-3">
           <button
+            @click="$emit('editReport')"
             class="claybutton inline-flex items-center gap-2 border border-primary/20 text-primary bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-xl font-medium transition-all duration-200"
           >
             <svg
@@ -90,6 +91,30 @@
           </button>
 
           <button
+            @click="$emit('shareReport')"
+            class="claybutton inline-flex items-center gap-2 border border-border text-text-secondary bg-surface hover:bg-muted px-4 py-2 rounded-xl font-medium transition-all duration-200"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+              />
+            </svg>
+            Share
+          </button>
+        </div>
+
+        <!-- Share button for non-owners -->
+        <div v-else class="flex items-center gap-3">
+          <button
+            @click="$emit('shareReport')"
             class="claybutton inline-flex items-center gap-2 border border-border text-text-secondary bg-surface hover:bg-muted px-4 py-2 rounded-xl font-medium transition-all duration-200"
           >
             <svg
@@ -114,7 +139,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { type Report } from '@/data/mockData'
+import { currentUser } from '@/utils/auth'
 import StatusBadge from '@/components/shared/StatusBadge.vue'
 
 interface Props {
@@ -122,7 +149,17 @@ interface Props {
   isOwner: boolean
 }
 
-defineProps<Props>()
+interface Emits {
+  editReport: []
+  shareReport: []
+}
+
+const props = defineProps<Props>()
+defineEmits<Emits>()
+
+const isAdmin = computed(() => {
+  return currentUser.value?.role === 'admin'
+})
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {

@@ -52,7 +52,12 @@
         <!-- Report Details -->
         <div v-else class="space-y-8">
           <!-- Report Header -->
-          <ReportHeader :report="report" :is-owner="isOwner" />
+          <ReportHeader
+            :report="report"
+            :is-owner="isOwner"
+            @edit-report="openEditModal"
+            @share-report="openShareModal"
+          />
 
           <!-- Main Content Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -78,15 +83,30 @@
             </div>
           </div>
         </div>
+
+        <!-- Edit Report Modal -->
+        <EditReportModal
+          :show="showEditModal"
+          :report="report ?? null"
+          @close="closeEditModal"
+          @updated="handleReportUpdated"
+        />
+
+        <!-- Share Report Modal -->
+        <ShareReportModal
+          :show="showShareModal"
+          :report="report ?? null"
+          @close="closeShareModal"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { mockReports, mockUsers } from '@/data/mockData'
+import { mockReports, type Report } from '@/data/mockData'
 import { currentUser } from '@/utils/auth'
 import BackButton from '@/components/report-details/BackButton.vue'
 import ReportHeader from '@/components/report-details/ReportHeader.vue'
@@ -95,6 +115,8 @@ import ReportDescription from '@/components/report-details/ReportDescription.vue
 import ReportPhoto from '@/components/report-details/ReportPhoto.vue'
 import ReporterInfo from '@/components/report-details/ReporterInfo.vue'
 import StatusHistory from '@/components/report-details/StatusHistory.vue'
+import EditReportModal from '@/components/report-details/EditReportModal.vue'
+import ShareReportModal from '@/components/report-details/ShareReportModal.vue'
 
 interface Props {
   id: string
@@ -102,6 +124,10 @@ interface Props {
 
 const props = defineProps<Props>()
 const router = useRouter()
+
+// Modal states
+const showEditModal = ref(false)
+const showShareModal = ref(false)
 
 // Find the report
 const report = computed(() => {
@@ -122,5 +148,27 @@ const goBack = () => {
   } else {
     router.push('/')
   }
+}
+
+const openEditModal = () => {
+  showEditModal.value = true
+}
+
+const closeEditModal = () => {
+  showEditModal.value = false
+}
+
+const openShareModal = () => {
+  showShareModal.value = true
+}
+
+const closeShareModal = () => {
+  showShareModal.value = false
+}
+
+const handleReportUpdated = () => {
+  closeEditModal()
+  // Force re-render by reloading the page to see updated data
+  window.location.reload()
 }
 </script>
