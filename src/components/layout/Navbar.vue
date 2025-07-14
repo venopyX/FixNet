@@ -137,7 +137,7 @@
         <!-- Authenticated User Menu -->
         <div v-else class="hidden md:flex items-center space-x-3">
           <router-link
-            :to="currentUser?.role === 'admin' ? '/admin' : '/dashboard'"
+            :to="getDashboardRoute()"
             class="claybutton inline-flex items-center gap-2 text-text-secondary hover:text-primary bg-surface hover:bg-primary/5 px-4 py-2 rounded-xl font-medium transition-all duration-200"
           >
             <svg
@@ -187,7 +187,7 @@
             <Transition name="dropdown">
               <div
                 v-if="showProfileMenu"
-                class="absolute right-0 top-full mt-2 w-64 claycard bg-surface border border-border/50 rounded-2xl shadow-xl z-50"
+                class="absolute right-0 top-full mt-2 w-64 claycard bg-surface border border-border/50 rounded-2xl shadow-xl z-50 profile-dropdown"
               >
                 <div class="p-4">
                   <!-- User Info -->
@@ -360,7 +360,7 @@
       <Transition name="slide-down">
         <div v-if="showMobileMenu" class="md:hidden">
           <div
-            class="claycard bg-surface/95 backdrop-blur-sm border border-border/50 rounded-2xl mt-4 mb-4 p-4 shadow-lg"
+            class="claycard bg-surface/95 backdrop-blur-sm border border-border/50 rounded-2xl mt-4 mb-4 p-4 shadow-lg mobile-menu-content"
           >
             <!-- Navigation Links -->
             <div class="space-y-2 mb-4">
@@ -539,7 +539,7 @@
 
               <!-- Dashboard Link -->
               <router-link
-                :to="currentUser?.role === 'admin' ? '/admin' : '/dashboard'"
+                :to="getDashboardRoute()"
                 class="claybutton flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:scale-[1.02] transition-all duration-200 w-full"
                 @click="closeMobileMenu"
               >
@@ -632,6 +632,21 @@ const closeMobileMenu = () => {
 
 const closeProfileMenu = () => {
   showProfileMenu.value = false
+}
+
+// Fix: Add proper role-based dashboard routing
+const getDashboardRoute = () => {
+  if (!currentUser.value) return '/dashboard'
+
+  const { role } = currentUser.value
+
+  if (['admin', 'super_admin'].includes(role)) {
+    return '/admin'
+  } else if (role === 'agency_staff') {
+    return '/agency/dashboard'
+  } else {
+    return '/dashboard'
+  }
 }
 
 const handleLogoClick = () => {
@@ -747,5 +762,94 @@ const vClickOutside = {
 .dropdown-leave-from {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* Fix for short screen heights - Profile Dropdown */
+.profile-dropdown {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Fix for short screen heights - Mobile Menu */
+.mobile-menu-content {
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Scroll fade effect for mobile menu */
+.mobile-menu-content::before {
+  content: '';
+  position: sticky;
+  top: 0;
+  height: 8px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+  pointer-events: none;
+  z-index: 1;
+  margin-bottom: -8px;
+}
+
+.mobile-menu-content::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  height: 8px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+  z-index: 1;
+  margin-top: -8px;
+}
+
+/* Custom scrollbar for better UX */
+.profile-dropdown::-webkit-scrollbar,
+.mobile-menu-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.profile-dropdown::-webkit-scrollbar-track,
+.mobile-menu-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.profile-dropdown::-webkit-scrollbar-thumb,
+.mobile-menu-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.profile-dropdown::-webkit-scrollbar-thumb:hover,
+.mobile-menu-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Hide scrollbar for Firefox */
+.profile-dropdown,
+.mobile-menu-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Ensure proper spacing for scrollable content */
+@media (max-height: 600px) {
+  .profile-dropdown {
+    max-height: calc(100vh - 100px);
+  }
+
+  .mobile-menu-content {
+    max-height: calc(100vh - 60px);
+  }
+}
+
+@media (max-height: 400px) {
+  .profile-dropdown {
+    max-height: calc(100vh - 80px);
+  }
+
+  .mobile-menu-content {
+    max-height: calc(100vh - 40px);
+  }
 }
 </style>
