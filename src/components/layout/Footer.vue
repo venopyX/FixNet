@@ -5,9 +5,14 @@
         <div class="md:col-span-2">
           <div class="flex items-center space-x-3 mb-6">
             <div
-              class="claycard w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center"
+              class="claycard w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center overflow-hidden"
             >
-              <span class="text-white font-bold text-lg">FA</span>
+              <img
+                src="/logo.png"
+                alt="FixNet Logo"
+                class="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
             <span class="font-bold text-2xl text-white">FixNet</span>
           </div>

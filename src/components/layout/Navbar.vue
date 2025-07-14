@@ -7,9 +7,14 @@
         <div class="flex items-center">
           <router-link to="/" class="flex items-center space-x-3" @click.prevent="handleLogoClick">
             <div
-              class="claycard w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center"
+              class="claycard w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center overflow-hidden"
             >
-              <span class="text-white font-bold text-sm">FA</span>
+              <img
+                src="/logo.png"
+                alt="FixNet Logo"
+                class="w-full h-full object-contain"
+                loading="eager"
+              />
             </div>
             <span class="font-bold text-xl text-text-primary">FixNet</span>
           </router-link>
