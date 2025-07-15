@@ -12,6 +12,7 @@
         <div class="text-xs text-(--text-muted) space-y-1">
           <div>Resident: john@example.com / demo123</div>
           <div>Admin: admin@fixnet.com / admin123</div>
+          <div>Agency: sarah.wilson@email.com / agent123</div>
         </div>
       </div>
 
