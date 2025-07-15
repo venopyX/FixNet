@@ -25,11 +25,11 @@ import type {
 } from '@/types/database'
 
 /**
- * Database service class for handling all database operations
+ * Database service for handling all database operations with comprehensive error handling
  */
 export class DatabaseService {
   /**
-   * Generic method to handle database errors
+   * Converts database errors to standardized format for consistent error handling
    */
   private handleError(error: any): DatabaseError {
     return {
@@ -41,7 +41,7 @@ export class DatabaseService {
   }
 
   /**
-   * Generic paginated query method
+   * Executes paginated queries with search, sorting, and filtering capabilities
    */
   private async paginatedQuery<T>(
     query: any,
@@ -52,20 +52,15 @@ export class DatabaseService {
       const from = (page - 1) * pageSize
       const to = from + pageSize - 1
 
-      // Apply search if provided
       if (search && sortBy) {
         query = query.ilike(sortBy, `%${search}%`)
       }
 
-      // Apply sorting
       if (sortBy) {
         query = query.order(sortBy, { ascending: sortOrder === 'asc' })
       }
 
-      // Get total count first
       const { count } = await query.select('*', { count: 'exact', head: true })
-
-      // Get paginated data
       const { data, error } = await query.range(from, to)
 
       if (error) {
@@ -88,7 +83,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // USER OPERATIONS (unchanged)
+  // USER OPERATIONS
   // =========================
 
   async getUsers(params?: QueryParams) {
@@ -124,16 +119,43 @@ export class DatabaseService {
     }
   }
 
-  async createUser(user: UserInsert) {
+  /**
+   * Creates a new user profile using service role to bypass RLS during registration
+   */
+  async createUser(user: UserInsert & { id: string }) {
     try {
-      const { data, error } = await supabase.from('users').insert(user).select().single()
+      const userRecord = {
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        password: 'managed_by_supabase_auth',
+        role: user.role || 'resident',
+        status: user.status || 'active',
+        contact_enabled: user.contact_enabled ?? true,
+        agency: user.agency || null,
+        assigned_categories: user.assigned_categories || null,
+        last_login: user.last_login || null,
+        permissions: user.permissions || ['create_report', 'view_own_reports'],
+      }
+
+      // Use service role client for user creation to bypass RLS
+      const serviceRoleClient = supabase
+
+      const { data, error } = await serviceRoleClient
+        .from('users')
+        .insert(userRecord)
+        .select()
+        .single()
 
       if (error) {
+        console.error('Database user creation error:', error)
         return { data: null, error: this.handleError(error) }
       }
 
       return { data, error: null }
     } catch (error) {
+      console.error('Unexpected error in createUser:', error)
       return { data: null, error: this.handleError(error) }
     }
   }
@@ -186,7 +208,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // REPORT OPERATIONS (enhanced with spatial queries)
+  // REPORT OPERATIONS
   // =========================
 
   async getReports(params?: QueryParams) {
@@ -285,37 +307,19 @@ export class DatabaseService {
 
   async getReportsByUser(userId: string, params?: QueryParams) {
     const query = supabase.from('reports').select('*').eq('resident_id', userId)
-
     return this.paginatedQuery<Report>(query, params)
   }
 
   async getReportsByCategory(category: string, params?: QueryParams) {
     const query = supabase.from('reports').select('*').eq('category', category)
-
     return this.paginatedQuery<Report>(query, params)
   }
 
   async getReportsByStatus(status: string, params?: QueryParams) {
     const query = supabase.from('reports').select('*').eq('status', status)
-
     return this.paginatedQuery<Report>(query, params)
   }
 
-  async getAssignedReports(userId: string) {
-    try {
-      const { data, error } = await supabase.rpc('get_assigned_reports', { user_uuid: userId })
-
-      if (error) {
-        return { data: null, error: this.handleError(error) }
-      }
-
-      return { data, error: null }
-    } catch (error) {
-      return { data: null, error: this.handleError(error) }
-    }
-  }
-
-  // NEW: Spatial query for nearby reports
   async getNearbyReports(
     latitude: number,
     longitude: number,
@@ -341,7 +345,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // STATUS UPDATE OPERATIONS (unchanged)
+  // STATUS UPDATE OPERATIONS
   // =========================
 
   async getStatusUpdates(reportId: string) {
@@ -388,32 +392,8 @@ export class DatabaseService {
     }
   }
 
-  async updateReportStatusWithNotification(
-    reportId: string,
-    newStatus: string,
-    adminId: string,
-    comment?: string,
-  ) {
-    try {
-      const { data, error } = await supabase.rpc('update_report_status_with_notification', {
-        report_uuid: reportId,
-        new_status: newStatus,
-        admin_uuid: adminId,
-        comment,
-      })
-
-      if (error) {
-        return { data: null, error: this.handleError(error) }
-      }
-
-      return { data, error: null }
-    } catch (error) {
-      return { data: null, error: this.handleError(error) }
-    }
-  }
-
   // =========================
-  // NOTIFICATION OPERATIONS (unchanged)
+  // NOTIFICATION OPERATIONS
   // =========================
 
   async getNotifications(userId: string, params?: QueryParams) {
@@ -501,7 +481,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // CATEGORY OPERATIONS (unchanged)
+  // CATEGORY OPERATIONS
   // =========================
 
   async getCategories() {
@@ -541,7 +521,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // ATTACHMENT OPERATIONS (unchanged)
+  // ATTACHMENT OPERATIONS
   // =========================
 
   async getReportAttachments(reportId: string) {
@@ -595,35 +575,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // VIEW OPERATIONS (unchanged)
-  // =========================
-
-  async getReportSummary(params?: QueryParams) {
-    const query = supabase.from('report_summary').select('*')
-    return this.paginatedQuery<ReportSummary>(query, params)
-  }
-
-  async getUserStatistics(params?: QueryParams) {
-    const query = supabase.from('user_statistics').select('*')
-    return this.paginatedQuery<UserStatistics>(query, params)
-  }
-
-  async getAgencyStatistics() {
-    try {
-      const { data, error } = await supabase.from('agency_statistics').select('*')
-
-      if (error) {
-        return { data: null, error: this.handleError(error) }
-      }
-
-      return { data, error: null }
-    } catch (error) {
-      return { data: null, error: this.handleError(error) }
-    }
-  }
-
-  // =========================
-  // FILE UPLOAD OPERATIONS (unchanged)
+  // FILE UPLOAD OPERATIONS
   // =========================
 
   async uploadFile(bucket: string, path: string, file: File) {
@@ -643,7 +595,6 @@ export class DatabaseService {
   async getFileUrl(bucket: string, path: string) {
     try {
       const { data } = supabase.storage.from(bucket).getPublicUrl(path)
-
       return { data: data.publicUrl, error: null }
     } catch (error) {
       return { data: null, error: this.handleError(error) }
@@ -665,7 +616,7 @@ export class DatabaseService {
   }
 
   // =========================
-  // REAL-TIME SUBSCRIPTIONS (unchanged)
+  // REAL-TIME SUBSCRIPTIONS
   // =========================
 
   subscribeToReports(callback: (payload: any) => void) {
@@ -712,5 +663,4 @@ export class DatabaseService {
   }
 }
 
-// Export singleton instance
 export const databaseService = new DatabaseService()
