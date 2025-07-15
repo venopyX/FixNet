@@ -92,6 +92,10 @@ export interface Database {
         }
         Returns: NearbyReport[]
       }
+      get_user_role: {
+        Args: { user_id?: string }
+        Returns: string
+      }
     }
   }
 }
@@ -103,7 +107,9 @@ export interface BaseModel {
   updated_at: string
 }
 
-// User types - Updated to match schema
+/**
+ * User entity representing system users with role-based access
+ */
 export interface User extends BaseModel {
   first_name: string
   last_name: string
@@ -121,7 +127,9 @@ export interface User extends BaseModel {
 export type UserInsert = Omit<User, 'id' | 'created_at' | 'updated_at'>
 export type UserUpdate = Partial<Omit<User, 'id' | 'created_at'>>
 
-// Resident types - Updated to match schema
+/**
+ * Resident profile with additional contact information
+ */
 export interface Resident {
   user_id: string
   address?: string
@@ -131,7 +139,9 @@ export interface Resident {
 export type ResidentInsert = Omit<Resident, 'id' | 'created_at' | 'updated_at'>
 export type ResidentUpdate = Partial<Omit<Resident, 'id' | 'created_at'>>
 
-// Report types - Updated with geom field and enhanced features
+/**
+ * Report entity for community issue tracking
+ */
 export interface Report extends BaseModel {
   resident_id: string
   title: string
@@ -142,7 +152,7 @@ export interface Report extends BaseModel {
   status: 'pending' | 'under_review' | 'resolved' | 'rejected'
   longitude?: number
   latitude?: number
-  geom?: any // PostGIS geometry field - can be more specific if needed
+  geom?: any // PostGIS geometry field
   priority: 'low' | 'medium' | 'high'
   assigned_to?: string
   resolution_comment?: string
@@ -153,7 +163,9 @@ export interface Report extends BaseModel {
 export type ReportInsert = Omit<Report, 'id' | 'created_at' | 'updated_at' | 'geom'>
 export type ReportUpdate = Partial<Omit<Report, 'id' | 'created_at' | 'geom'>>
 
-// Status Update types
+/**
+ * Status update tracking for reports
+ */
 export interface StatusUpdate extends BaseModel {
   report_id: string
   admin_id?: string
@@ -168,7 +180,9 @@ export interface StatusUpdate extends BaseModel {
 export type StatusUpdateInsert = Omit<StatusUpdate, 'id' | 'created_at' | 'updated_at'>
 export type StatusUpdateUpdate = Partial<Omit<StatusUpdate, 'id' | 'created_at'>>
 
-// Notification types
+/**
+ * User notification system
+ */
 export interface Notification extends BaseModel {
   user_id: string
   type: 'new_report' | 'status_update' | 'assignment' | 'high_priority' | 'reminder'
@@ -182,7 +196,9 @@ export interface Notification extends BaseModel {
 export type NotificationInsert = Omit<Notification, 'id' | 'created_at' | 'updated_at'>
 export type NotificationUpdate = Partial<Omit<Notification, 'id' | 'created_at'>>
 
-// Category types - Updated to match schema
+/**
+ * Report category management
+ */
 export interface Category extends BaseModel {
   name: string
   display_name: string
@@ -197,7 +213,9 @@ export interface Category extends BaseModel {
 export type CategoryInsert = Omit<Category, 'id' | 'created_at' | 'updated_at'>
 export type CategoryUpdate = Partial<Omit<Category, 'id' | 'created_at'>>
 
-// Report Attachment types
+/**
+ * File attachments for reports
+ */
 export interface ReportAttachment extends BaseModel {
   report_id: string
   file_url: string
@@ -211,7 +229,9 @@ export interface ReportAttachment extends BaseModel {
 export type ReportAttachmentInsert = Omit<ReportAttachment, 'id' | 'created_at' | 'updated_at'>
 export type ReportAttachmentUpdate = Partial<Omit<ReportAttachment, 'id' | 'created_at'>>
 
-// User Session types
+/**
+ * User session tracking
+ */
 export interface UserSession extends BaseModel {
   user_id: string
   session_token: string
@@ -224,7 +244,9 @@ export interface UserSession extends BaseModel {
 export type UserSessionInsert = Omit<UserSession, 'id' | 'created_at' | 'updated_at'>
 export type UserSessionUpdate = Partial<Omit<UserSession, 'id' | 'created_at'>>
 
-// Audit Log types
+/**
+ * System audit logging
+ */
 export interface AuditLog extends BaseModel {
   user_id?: string
   action: string
@@ -239,7 +261,9 @@ export interface AuditLog extends BaseModel {
 export type AuditLogInsert = Omit<AuditLog, 'id' | 'created_at' | 'updated_at'>
 export type AuditLogUpdate = Partial<Omit<AuditLog, 'id' | 'created_at'>>
 
-// View types - Updated with new fields
+/**
+ * Report summary view with joined data
+ */
 export interface ReportSummary {
   id: string
   title: string
@@ -260,6 +284,9 @@ export interface ReportSummary {
   estimated_response_time: number
 }
 
+/**
+ * User statistics aggregation
+ */
 export interface UserStatistics {
   id: string
   first_name: string
@@ -275,6 +302,9 @@ export interface UserStatistics {
   pending_reports: number
 }
 
+/**
+ * Agency performance metrics
+ */
 export interface AgencyStatistics {
   agency: string
   staff_count: number
@@ -286,6 +316,9 @@ export interface AgencyStatistics {
   high_priority_reports: number
 }
 
+/**
+ * Assigned reports for staff members
+ */
 export interface AssignedReport {
   id: string
   title: string
@@ -295,7 +328,9 @@ export interface AssignedReport {
   created_at: string
 }
 
-// New interface for nearby reports function
+/**
+ * Nearby reports for location-based queries
+ */
 export interface NearbyReport {
   id: string
   title: string
@@ -304,13 +339,18 @@ export interface NearbyReport {
   distance_km: number
 }
 
-// API Response types
+/**
+ * Standard API response wrapper
+ */
 export interface ApiResponse<T> {
   data?: T
   error?: string
   message?: string
 }
 
+/**
+ * Paginated response structure
+ */
 export interface PaginatedResponse<T> {
   data: T[]
   total: number
@@ -319,7 +359,9 @@ export interface PaginatedResponse<T> {
   totalPages: number
 }
 
-// Query parameter types
+/**
+ * Query parameters for database operations
+ */
 export interface QueryParams {
   page?: number
   pageSize?: number
@@ -329,7 +371,9 @@ export interface QueryParams {
   filters?: Record<string, any>
 }
 
-// Error types
+/**
+ * Database error structure
+ */
 export interface DatabaseError {
   code: string
   message: string
@@ -337,7 +381,9 @@ export interface DatabaseError {
   hint?: string
 }
 
-// Database service response types
+/**
+ * Database service response types
+ */
 export interface DatabaseResponse<T> {
   data: T | null
   error: DatabaseError | null
