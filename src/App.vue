@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer.vue'
 import { onMounted, onUnmounted } from 'vue'
 
 // Performance optimization: Use requestAnimationFrame for smooth animations
-let animationFrame: number
+let animationFrame: number | undefined
 let isReducedMotion = false
 
 onMounted(() => {
