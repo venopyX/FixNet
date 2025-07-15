@@ -12,7 +12,17 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-// Initialize authentication on app startup
-authService.initializeAuth()
+/**
+ * Initialize authentication before mounting the app
+ */
+const initializeApp = async () => {
+  try {
+    await authService.initializeAuth()
+  } catch (error) {
+    console.error('Failed to initialize authentication:', error)
+  } finally {
+    app.mount('#app')
+  }
+}
 
-app.mount('#app')
+initializeApp()
