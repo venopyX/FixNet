@@ -87,7 +87,7 @@
             </li>
             <li>
               <router-link
-                to="/report"
+                to="/report/new"
                 class="claybutton text-gray-300 hover:text-primary transition-colors duration-200 flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5"
               >
                 <svg

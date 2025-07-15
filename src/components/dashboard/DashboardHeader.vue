@@ -81,7 +81,7 @@
 
         <div class="flex items-center gap-3">
           <router-link
-            to="/report"
+            to="/report/new"
             class="claybutton inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-2xl font-medium hover:scale-105 transition-all duration-200"
           >
             <svg

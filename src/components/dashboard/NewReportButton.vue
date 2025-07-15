@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="/report"
+    to="/report/new"
     class="claycard group bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 hover:from-primary/20 hover:via-secondary/20 hover:to-accent/20 p-8 rounded-3xl border-2 border-dashed border-primary/30 hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer block"
   >
     <div class="text-center">

@@ -112,7 +112,7 @@
 
       <router-link
         v-if="selectedFilter === 'all'"
-        to="/report"
+        to="/report/new"
         class="claybutton inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-2xl font-medium hover:scale-105 transition-all duration-200"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
