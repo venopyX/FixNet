@@ -1,21 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import { isAuthenticated, currentUser } from '@/utils/auth'
+import { isAuthenticated, currentUser, authService } from '@/utils/auth'
 
-// Define role types for type safety
 type UserRole = 'super_admin' | 'admin' | 'agency_staff' | 'resident'
 
-// Extend the RouteMeta interface to include our custom properties
 declare module 'vue-router' {
   interface RouteMeta {
     requiresAuth?: boolean
-    role?: UserRole
+    roles?: UserRole[]
     forceScrollTop?: boolean
+    title?: string
   }
 }
 
-// Type-safe role hierarchy - defines which roles can access what
+/**
+ * Role hierarchy for permission checking
+ */
 const roleHierarchy: Record<UserRole, UserRole[]> = {
   super_admin: ['super_admin', 'admin', 'agency_staff', 'resident'],
   admin: ['admin', 'resident'],
@@ -24,19 +25,12 @@ const roleHierarchy: Record<UserRole, UserRole[]> = {
 }
 
 /**
- * Check if user has required role or higher in hierarchy
- * @param userRole - Current user's role
- * @param requiredRole - Role required for the route
- * @returns boolean indicating if user has access
+ * Check if user has required role access
  */
-function hasRequiredRole(userRole: string | undefined, requiredRole: UserRole): boolean {
-  if (!userRole) return false
+function hasRoleAccess(userRole: string | undefined, allowedRoles: UserRole[]): boolean {
+  if (!userRole || !allowedRoles.length) return false
 
-  // Check if userRole exists in our hierarchy
-  if (!(userRole in roleHierarchy)) return false
-
-  // Type-safe access with assertion
-  return roleHierarchy[userRole as UserRole]?.includes(requiredRole) ?? false
+  return allowedRoles.some((role) => roleHierarchy[userRole as UserRole]?.includes(role) ?? false)
 }
 
 const routes: RouteRecordRaw[] = [
@@ -44,69 +38,108 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Home',
     component: HomeView,
+    meta: { title: 'FixNet - Community Issue Reporting' },
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: () => import('@/views/AuthView.vue'),
+    meta: {
+      title: 'Sign In - FixNet',
+      forceScrollTop: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if (isAuthenticated.value) {
+        next('/dashboard')
+      } else {
+        next()
+      }
+    },
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/DashboardView.vue'),
-    meta: { requiresAuth: true, role: 'resident' },
+    meta: {
+      requiresAuth: true,
+      roles: ['resident'],
+      title: 'Dashboard - FixNet',
+    },
   },
   {
     path: '/admin',
-    name: 'Admin',
+    name: 'AdminDashboard',
     component: () => import('@/views/AdminDashboardView.vue'),
-    meta: { requiresAuth: true, role: 'admin' },
+    meta: {
+      requiresAuth: true,
+      roles: ['admin', 'super_admin'],
+      title: 'Admin Dashboard - FixNet',
+    },
   },
   {
     path: '/admin/users',
     name: 'AdminUserManagement',
     component: () => import('@/views/AdminUserManagementView.vue'),
-    meta: { requiresAuth: true, role: 'super_admin' },
-  },
-  {
-    path: '/agency',
-    name: 'Agency',
-    component: () => import('@/views/AgencyView.vue'),
+    meta: {
+      requiresAuth: true,
+      roles: ['super_admin'],
+      title: 'User Management - FixNet',
+    },
   },
   {
     path: '/agency/dashboard',
     name: 'AgencyDashboard',
     component: () => import('@/views/AgencyDashboardView.vue'),
-    meta: { requiresAuth: true, role: 'agency_staff' },
+    meta: {
+      requiresAuth: true,
+      roles: ['agency_staff'],
+      title: 'Agency Dashboard - FixNet',
+    },
   },
   {
-    path: '/profile/:id',
-    name: 'UserProfile',
-    component: () => import('@/views/UserProfileView.vue'),
-    props: true,
-  },
-  {
-    path: '/reports',
-    name: 'Reports',
-    component: () => import('@/views/ReportsView.vue'),
-  },
-  {
-    path: '/report',
-    name: 'Report',
-    component: () => import('@/views/ReportView.vue'),
-    meta: { requiresAuth: true },
+    path: '/report/new',
+    name: 'CreateReport',
+    component: () => import('@/views/ReportCreateView.vue'),
+    meta: {
+      requiresAuth: true,
+      roles: ['resident', 'agency_staff', 'admin', 'super_admin'],
+      title: 'Create Report - FixNet',
+    },
   },
   {
     path: '/report/:id',
     name: 'ReportDetails',
     component: () => import('@/views/ReportDetailsView.vue'),
     props: true,
+    meta: { title: 'Report Details - FixNet' },
   },
   {
-    path: '/auth',
-    name: 'Auth',
-    component: () => import('@/views/AuthView.vue'),
-    meta: { forceScrollTop: true },
+    path: '/reports',
+    name: 'Reports',
+    component: () => import('@/views/ReportsView.vue'),
+    meta: { title: 'Reports - FixNet' },
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/ProfileView.vue'),
+    meta: {
+      requiresAuth: true,
+      roles: ['resident', 'agency_staff', 'admin', 'super_admin'],
+      title: 'Profile - FixNet',
+    },
+  },
+  {
+    path: '/email-verification',
+    name: 'EmailVerification',
+    component: () => import('@/views/EmailVerificationView.vue'),
+    meta: { title: 'Email Verification - FixNet' },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/NotFoundView.vue'),
+    meta: { title: 'Page Not Found - FixNet' },
   },
 ]
 
@@ -114,63 +147,78 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Special handling for routes that need forced scroll
-    // if (to.meta?.forceScrollTop || to.path === '/auth') {
-    //   return new Promise((resolve) => {
-    //     setTimeout(() => {
-    //       // Force immediate scroll for problematic routes
-    //       document.documentElement.scrollTop = 0
-    //       document.body.scrollTop = 0
-    //       resolve({ top: 0, left: 0, behavior: 'auto' })
-    //     }, 0)
-    //   })
-    // }
+    if (to.meta?.forceScrollTop) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          document.documentElement.scrollTop = 0
+          document.body.scrollTop = 0
+          resolve({ top: 0, left: 0, behavior: 'auto' })
+        }, 0)
+      })
+    }
 
-    // If there's a saved position (browser back/forward), use it
     if (savedPosition) {
       return savedPosition
     }
 
-    // For hash links to actual elements, scroll to the element
     if (to.hash) {
       return new Promise((resolve) => {
-        // Wait a bit for the page to render
         setTimeout(() => {
           const element = document.querySelector(to.hash)
           if (element) {
-            resolve({
-              el: to.hash,
-              behavior: 'smooth',
-            })
+            resolve({ el: to.hash, behavior: 'smooth' })
           } else {
-            // Element not found, just scroll to top
             resolve({ top: 0, left: 0, behavior: 'smooth' })
           }
         }, 100)
       })
     }
 
-    // Default: scroll to top for new navigation
     return { top: 0, left: 0, behavior: 'smooth' }
   },
 })
 
-// Navigation guards
-router.beforeEach((to, from, next) => {
-  // Check authentication first
-  if (to.meta.requiresAuth && !isAuthenticated.value) {
-    next('/auth')
-    return
+/**
+ * Global navigation guards
+ */
+router.beforeEach(async (to, from, next) => {
+  // Set page title
+  if (to.meta.title) {
+    document.title = to.meta.title
   }
 
-  // Check role-based access with hierarchy support
-  if (to.meta.role && !hasRequiredRole(currentUser.value?.role, to.meta.role)) {
-    // Redirect to home if access denied
-    next('/')
-    return
+  // Check if route requires authentication
+  if (to.meta.requiresAuth) {
+    if (!isAuthenticated.value) {
+      // Try to get current user in case session exists but user is not loaded
+      const user = await authService.getCurrentUser()
+
+      if (!user) {
+        next({
+          path: '/auth',
+          query: { redirect: to.fullPath },
+        })
+        return
+      }
+    }
+
+    // Check role-based access
+    if (to.meta.roles && to.meta.roles.length > 0) {
+      if (!hasRoleAccess(currentUser.value?.role, to.meta.roles)) {
+        // Redirect based on user role
+        const userRole = currentUser.value?.role
+        if (userRole === 'admin' || userRole === 'super_admin') {
+          next('/admin')
+        } else if (userRole === 'agency_staff') {
+          next('/agency/dashboard')
+        } else {
+          next('/dashboard')
+        }
+        return
+      }
+    }
   }
 
-  // Allow navigation
   next()
 })
 
